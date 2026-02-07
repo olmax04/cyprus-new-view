@@ -18,7 +18,7 @@ export default async function AboutUs() {
 
   const features = aboutUs?.features || []
   const stats = aboutUs?.stats || []
-  const image = typeof aboutUs?.image === 'string' ? null : aboutUs?.image
+  const image = typeof aboutUs?.image === 'number' ? null : aboutUs?.image
   const imageSrc = image?.url
 
   return (
@@ -96,7 +96,7 @@ export default async function AboutUs() {
           <div className="mt-16 md:mt-24 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
               const IconComponent = feature.icon
-                ? (LucideIcons as Record<string, React.ComponentType<{ className?: string }>>)[
+                ? (LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[
                     feature.icon
                   ]
                 : null
