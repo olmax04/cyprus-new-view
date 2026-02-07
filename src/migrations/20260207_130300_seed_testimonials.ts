@@ -164,7 +164,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         },
       ],
     },
-  } as const
+  }
 
   // Create or update testimonials global for each locale
   for (const [locale, data] of Object.entries(seeds)) {

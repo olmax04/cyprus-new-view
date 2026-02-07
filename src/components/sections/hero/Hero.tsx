@@ -56,7 +56,7 @@ export default async function Hero() {
   const galleryItems =
     hero?.galleryCards
       ?.map((card) => {
-        const image = typeof card.image === 'string' ? null : card.image
+        const image = typeof card.image === 'number' ? null : card.image
         const src = image?.url || null
         if (!src) return null
         return { src, alt: card.label }

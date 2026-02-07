@@ -6,11 +6,11 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
 type TestimonialItem = {
   name: string
-  role?: string
-  country?: string
+  role?: string | null
+  country?: string | null
   content: string
-  image?: { url?: string } | string | null
-  rating?: number
+  image?: { url?: string | null } | number | null
+  rating?: number | null
 }
 
 type TestimonialsCarouselProps = {
@@ -47,7 +47,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
   }, [isAnimating])
 
   const activeItem = items[activeIndex]
-  const image = typeof activeItem?.image === 'string' ? null : activeItem?.image
+  const image = typeof activeItem?.image === 'number' ? null : activeItem?.image
   const imageSrc = image?.url
 
   return (

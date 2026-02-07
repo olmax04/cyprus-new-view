@@ -144,7 +144,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
       },
       galleryCards: [],
     },
-  } as const
+  }
 
   // Create or update hero global for each locale
   for (const [locale, data] of Object.entries(seeds)) {

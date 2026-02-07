@@ -152,7 +152,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
       ],
       buttonLabel: 'Dozvedieť sa viac',
     },
-  } as const
+  }
 
   // Create or update about-us global for each locale
   for (const [locale, data] of Object.entries(seeds)) {
