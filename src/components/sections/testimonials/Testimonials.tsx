@@ -26,7 +26,7 @@ export default async function Testimonials() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-16">
         {/* Заголовок секции */}
-        <AnimatedSection animation="fade-up" delay={0}>
+        <AnimatedSection animation="fade-up" delay={0} duration={1.2}>
           <div className="text-center mb-12 md:mb-16">
             {testimonials?.subheading && (
               <p
@@ -47,7 +47,7 @@ export default async function Testimonials() {
 
         {/* Отзывы */}
         {items.length > 0 && (
-          <AnimatedSection animation="scale-up" delay={200}>
+          <AnimatedSection animation="scale-up" delay={300} duration={1.2}>
             <TestimonialsCarousel items={items} />
           </AnimatedSection>
         )}

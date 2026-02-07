@@ -10,14 +10,17 @@ interface AnimatedSectionProps {
   delay?: number
   duration?: number
   className?: string
+  /** How much of the element must be visible before triggering (0-1) */
+  threshold?: number
 }
 
 export default function AnimatedSection({
   children,
   animation = 'fade-up',
   delay = 0,
-  duration = 0.6,
+  duration = 1,
   className = '',
+  threshold = 0.15,
 }: AnimatedSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -30,8 +33,8 @@ export default function AnimatedSection({
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
+        threshold,
+        rootMargin: '0px 0px -80px 0px',
       }
     )
 
@@ -45,39 +48,45 @@ export default function AnimatedSection({
         observer.unobserve(currentRef)
       }
     }
-  }, [])
+  }, [threshold])
 
-  const getAnimationClasses = () => {
-    const baseClasses = 'transition-all'
-    const durationClass = `duration-[${duration * 1000}ms]`
-    
-    if (!isVisible) {
-      switch (animation) {
-        case 'fade-up':
-          return `${baseClasses} ${durationClass} opacity-0 translate-y-12`
-        case 'fade-down':
-          return `${baseClasses} ${durationClass} opacity-0 -translate-y-12`
-        case 'fade-left':
-          return `${baseClasses} ${durationClass} opacity-0 translate-x-12`
-        case 'fade-right':
-          return `${baseClasses} ${durationClass} opacity-0 -translate-x-12`
-        case 'scale-up':
-          return `${baseClasses} ${durationClass} opacity-0 scale-95`
-        case 'fade':
-          return `${baseClasses} ${durationClass} opacity-0`
-        default:
-          return `${baseClasses} ${durationClass} opacity-0 translate-y-12`
+  const getInitialStyles = (): React.CSSProperties => {
+    if (isVisible) {
+      return {
+        opacity: 1,
+        transform: 'translate(0, 0) scale(1)',
+        transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }
     }
 
-    return `${baseClasses} ${durationClass} opacity-100 translate-y-0 translate-x-0 scale-100`
+    const base: React.CSSProperties = {
+      opacity: 0,
+      transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    }
+
+    switch (animation) {
+      case 'fade-up':
+        return { ...base, transform: 'translateY(60px)' }
+      case 'fade-down':
+        return { ...base, transform: 'translateY(-60px)' }
+      case 'fade-left':
+        return { ...base, transform: 'translateX(60px)' }
+      case 'fade-right':
+        return { ...base, transform: 'translateX(-60px)' }
+      case 'scale-up':
+        return { ...base, transform: 'scale(0.9)' }
+      case 'fade':
+        return { ...base, transform: 'translate(0, 0)' }
+      default:
+        return { ...base, transform: 'translateY(60px)' }
+    }
   }
 
   return (
     <div
       ref={ref}
-      className={`${getAnimationClasses()} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={className}
+      style={getInitialStyles()}
     >
       {children}
     </div>

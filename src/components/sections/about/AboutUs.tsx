@@ -31,7 +31,7 @@ export default async function AboutUs() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16">
         {/* Заголовок секции */}
-        <AnimatedSection animation="fade-up" delay={0}>
+        <AnimatedSection animation="fade-up" delay={0} duration={1.2}>
           <div className="text-center mb-12 md:mb-16">
             {aboutUs?.subheading && (
               <p className="text-[#C5A059] uppercase tracking-[0.3em] text-[0.8125rem] mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
@@ -46,7 +46,7 @@ export default async function AboutUs() {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Текст и статистика */}
-          <AnimatedSection animation="fade-right" delay={200}>
+          <AnimatedSection animation="fade-right" delay={300} duration={1.2}>
             <div className="space-y-8">
               {aboutUs?.description && (
                 <p className="text-white/70 text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>{aboutUs.description}</p>
@@ -78,7 +78,7 @@ export default async function AboutUs() {
 
           {/* Изображение */}
           {imageSrc && (
-            <AnimatedSection animation="fade-left" delay={400}>
+            <AnimatedSection animation="fade-left" delay={500} duration={1.2}>
               <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden border border-[#C5A059]/20">
                 <Image
                   src={imageSrc}
@@ -102,7 +102,7 @@ export default async function AboutUs() {
                 : null
 
               return (
-                <AnimatedSection key={index} animation="fade-up" delay={index * 100 + 600}>
+                <AnimatedSection key={index} animation="fade-up" delay={index * 150 + 400} duration={1}>
                   <div className="group p-6 border border-[#C5A059]/20 bg-[#1a0b10]/30 backdrop-blur-sm hover:border-[#C5A059]/40 hover:scale-105 transition-all duration-300">
                     {IconComponent && (
                       <div className="mb-4">
