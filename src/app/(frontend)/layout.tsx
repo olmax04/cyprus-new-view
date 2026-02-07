@@ -1,4 +1,5 @@
 import React from 'react'
+import { cookies } from 'next/headers'
 import './styles.css'
 
 export const metadata = {
@@ -8,9 +9,11 @@ export const metadata = {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('site-locale')?.value || 'en'
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
         <main>{children}</main>
       </body>

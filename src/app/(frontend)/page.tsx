@@ -1,59 +1,101 @@
-import { headers as getHeaders } from 'next/headers.js'
+import type { CSSProperties } from 'react'
+import { cookies } from 'next/headers'
 import Image from 'next/image'
+import { Cormorant_Garamond, Lato } from 'next/font/google' // Импортируем Cormorant
 import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
-
+import bgImage from '../../../figma/bgImage.png'
+import HeroHeader from '@/components/HeroHeader'
+import HeroDiamonds from '@/components/HeroDiamonds'
+import PageWrapper from '@/components/PageWrapper'
+import AboutUs from '@/components/AboutUs'
+import SectionDivider from '@/components/SectionDivider'
+import Testimonials from '@/components/Testimonials'
+import FAQ from '@/components/FAQ'
+import Footer from '@/components/Footer'
 import config from '@/payload.config'
-import './styles.css'
+// Настраиваем Cormorant Garamond
+const serifFont = Cormorant_Garamond({
+  subsets: ['latin'],
+  // Добавляем разные начертания: 300 (Light), 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold)
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-serif',
+  display: 'swap',
+})
 
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+const sansFont = Lato({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+export default async function Page() {
+  return (
+    <div className={`${serifFont.variable} ${sansFont.variable}`}>
+      <Hero />
+      <AboutUs />
+      <SectionDivider />
+      <Testimonials />
+      <FAQ />
+      <Footer />
+    </div>
+  )
+}
+
+async function Hero() {
+  const payload = await getPayload({ config })
+  const cookieStore = await cookies()
+  const locale = (cookieStore.get('site-locale')?.value || 'en') as 'en' | 'ru' | 'sk'
+  const hero = await payload.findGlobal({
+    slug: 'hero',
+    locale,
+  })
+
+  const nav = hero?.nav || {
+    aboutLabel: '',
+    faqLabel: '',
+    contactLabel: '',
+    whatsappLabel: '',
+    whatsappUrl: '',
+  }
+
+  const title = {
+    line1: hero?.title?.line1 || '',
+    line2: hero?.title?.line2 || '',
+    line3: hero?.title?.line3 || '',
+  }
+
+  const stats = hero?.stats || []
+  const categories = hero?.categories || []
+
+  const buttons = {
+    primaryLabel: hero?.buttons?.primaryLabel || '',
+    secondaryLabel: hero?.buttons?.secondaryLabel || '',
+  }
+
+  const galleryItems =
+    hero?.galleryCards
+      ?.map((card) => {
+        const image = typeof card.image === 'string' ? null : card.image
+        const src = image?.url || null
+        if (!src) return null
+        return { src, alt: card.label }
+      })
+      .filter((item): item is { src: string; alt: string } => Boolean(item)) || []
 
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+    <main
+      className={`relative min-h-screen w-full overflow-hidden bg-[#2a0f1b] ${serifFont.variable} ${sansFont.variable}`}
+    >
+      <HeroDiamonds />
+      <HeroHeader locale={locale} nav={nav} />
+      <PageWrapper
+        title={title}
+        stats={stats}
+        categories={categories}
+        buttons={buttons}
+        galleryItems={galleryItems}
+      />
+    </main>
   )
 }

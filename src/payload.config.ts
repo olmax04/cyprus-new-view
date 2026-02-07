@@ -7,6 +7,11 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Hero } from './globals/Hero'
+import { AboutUs } from './globals/AboutUs'
+import { Testimonials } from './globals/Testimonials'
+import { FAQ } from './globals/FAQ'
+import { Footer } from './globals/Footer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -19,7 +24,13 @@ export default buildConfig({
     },
   },
   collections: [Users, Media],
+  globals: [Hero, AboutUs, Testimonials, FAQ, Footer],
   editor: lexicalEditor(),
+  localization: {
+    locales: ['en', 'ru', 'sk'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -28,6 +39,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
   plugins: [],
