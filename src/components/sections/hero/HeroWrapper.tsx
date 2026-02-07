@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import SplashScreen from './SplashScreen'
-import HeroContent from './HeroContent'
+import SplashScreen from '@/components/layout/SplashScreen'
+import HeroContent from '@/components/sections/hero/HeroContent'
 
-interface PageWrapperProps {
+interface HeroWrapperProps {
   title: {
     line1: string
     line2: string
@@ -19,13 +19,13 @@ interface PageWrapperProps {
   galleryItems: Array<{ src: string; alt: string }>
 }
 
-export default function PageWrapper({
+export default function HeroWrapper({
   title,
   stats,
   categories,
   buttons,
   galleryItems,
-}: PageWrapperProps) {
+}: HeroWrapperProps) {
   const [splashComplete, setSplashComplete] = useState(false)
 
   return (

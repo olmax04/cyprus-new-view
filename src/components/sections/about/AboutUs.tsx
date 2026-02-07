@@ -2,8 +2,8 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
-import Button from '@/components/buttons/Button'
-import AnimatedSection from '@/components/AnimatedSection'
+import Button from '@/components/ui/Button'
+import AnimatedSection from '@/components/ui/AnimatedSection'
 import * as LucideIcons from 'lucide-react'
 
 export default async function AboutUs() {

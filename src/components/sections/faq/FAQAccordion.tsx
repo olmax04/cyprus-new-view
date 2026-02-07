@@ -44,11 +44,11 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   )
 }
 
-type FAQClientProps = {
+type FAQAccordionProps = {
   items: Array<{ question: string; answer: string }>
 }
 
-export default function FAQClient({ items }: FAQClientProps) {
+export default function FAQAccordion({ items }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
