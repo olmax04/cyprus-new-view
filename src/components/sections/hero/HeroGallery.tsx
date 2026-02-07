@@ -55,7 +55,7 @@ export default function HeroGallery({ items }: HeroGalleryProps) {
   }
 
   return (
-    <div className="hidden md:block w-[560px] md:w-[1200px] lg:w-[1280px] xl:w-[1360px] relative overflow-visible">
+    <div className="hidden md:block md:w-[340px] lg:w-[440px] xl:w-[520px] relative overflow-visible">
       <div
         className="relative h-[300px] md:h-[320px] lg:h-[400px] overflow-visible"
         onTouchStart={onTouchStart}
