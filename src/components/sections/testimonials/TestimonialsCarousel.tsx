@@ -13,11 +13,11 @@ type TestimonialItem = {
   rating?: number
 }
 
-type TestimonialsClientProps = {
+type TestimonialsCarouselProps = {
   items: TestimonialItem[]
 }
 
-export default function TestimonialsClient({ items }: TestimonialsClientProps) {
+export default function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -59,7 +59,7 @@ export default function TestimonialsClient({ items }: TestimonialsClientProps) {
           className="absolute top-6 left-6 text-6xl text-[#C5A059]/20 transition-opacity duration-500"
           style={{ fontFamily: 'var(--font-serif)', opacity: isAnimating ? 0 : 1 }}
         >
-          "
+          &ldquo;
         </div>
 
         <div

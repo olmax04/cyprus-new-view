@@ -3,10 +3,10 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Button from '@/components/buttons/Button'
-import WatchVideoButton from '@/components/buttons/WatchVideoButton'
-import HeroGallery from '@/components/HeroGallery'
-import bgImage from '../../figma/bgImage.png'
+import Button from '@/components/ui/Button'
+import WatchVideoButton from '@/components/ui/WatchVideoButton'
+import HeroGallery from '@/components/sections/hero/HeroGallery'
+import bgImage from '../../../../figma/bgImage.png'
 
 interface HeroContentProps {
   title: {
@@ -36,7 +36,6 @@ export default function HeroContent({
 
   useEffect(() => {
     if (startAnimation) {
-      // Небольшая задержка перед началом анимаций после splash screen
       const timer = setTimeout(() => setMounted(true), 100)
       return () => clearTimeout(timer)
     }
@@ -106,12 +105,10 @@ export default function HeroContent({
 
       {/* 3. КОНТЕНТ */}
       <div className="relative z-20 flex flex-col h-full min-h-screen">
-        {/* HERO SECTION */}
         <div className="flex-1 flex flex-col justify-center items-start text-left pb-10 md:pb-16 pt-24 md:pt-28">
           <div className="pl-8 pr-6 sm:pl-10 md:pl-[8%] md:pr-16 w-full ml-0">
             <div className="w-full md:flex md:items-start md:justify-between gap-10 items-start">
               <div className="flex-1 items-start">
-                {/* ЗАГОЛОВОК */}
                 <h1
                   className="self-start font-serif text-[clamp(2rem,10vw,9rem)] leading-[0.95] min-[768px]:leading-[0.9] min-[1024px]:leading-[0.85] tracking-[0.05em] uppercase grid gap-2 min-[768px]:gap-3 min-[1024px]:gap-4 drop-shadow-lg font-light min-[768px]:font-normal w-full max-w-none text-left break-words"
                   style={{ '--track': '0.05em' } as CSSProperties}
@@ -139,13 +136,12 @@ export default function HeroContent({
                   </span>
                 </h1>
 
-                {/* Информация под заголовком */}
                 <div
                   className={`mt-4 flex flex-wrap items-center gap-x-6 gap-y-4 md:gap-x-10 md:gap-y-6 text-[#C5A059] transition-all duration-700 delay-600 ${
                     mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                 >
-                  {stats.map((stat, index) => (
+                  {stats.map((stat) => (
                     <div key={`${stat.value}-${stat.label}`}>
                       <div className="text-2xl md:text-3xl font-light">{stat.value}</div>
                       <div className="text-[0.6875rem] md:text-[0.8125rem] uppercase tracking-[0.3em] text-[#C5A059]/70">
@@ -170,7 +166,6 @@ export default function HeroContent({
                   ))}
                 </div>
 
-                {/* Кнопки */}
                 <div
                   className={`mt-6 md:mt-5 md:-translate-y-2 max-w-md relative z-30 transition-all duration-700 delay-800 ${
                     mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -183,7 +178,6 @@ export default function HeroContent({
                 </div>
               </div>
 
-              {/* Галерея справа */}
               <div
                 className={`transition-all duration-700 delay-1000 ${
                   mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'

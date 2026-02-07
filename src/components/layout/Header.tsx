@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { Menu, Phone, X } from 'lucide-react'
-import LanguageToggle from '@/components/LanguageToggle'
+import LanguageToggle from '@/components/ui/LanguageToggle'
 
-type HeroHeaderProps = {
+type HeaderProps = {
   locale: 'en' | 'ru' | 'sk'
   nav: {
     aboutLabel: string
@@ -29,7 +29,7 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
-export default function HeroHeader({ locale, nav }: HeroHeaderProps) {
+export default function Header({ locale, nav }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
