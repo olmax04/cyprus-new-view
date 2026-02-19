@@ -1,67 +1,106 @@
-# Payload Blank Template
+<div align="center">
+  <h1>Cyprus New View</h1>
+  <p><strong>Современное веб-приложение на базе Next.js 15 и Payload CMS 3.0</strong></p>
 
-This template comes configured with the bare minimum to get started on anything you need.
+  <!-- Badges -->
+  <p>
+    <img src="https://img.shields.io/badge/Next.js-15.4-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/Payload_CMS-3.0-white?style=for-the-badge&logo=payload" alt="Payload CMS" />
+    <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  </p>
+</div>
 
-## Quick start
+---
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+## 📖 О проекте
 
-## Quick Start - local setup
+**Cyprus New View** — это полнофункциональное веб-приложение с интегрированной Headless CMS (Payload CMS), построенное на современных технологиях фронтенда. Проект включает в себя стильную публичную часть сайта и мощную административную панель для удобного управления контентом, медиа и пользователями.
 
-To spin up this template locally, follow these steps:
+## 🛠 Технологии
 
-### Clone
+- **Фреймворк:** [Next.js 15](https://nextjs.org/) (App Router)
+- **CMS:** [Payload 3.0](https://payloadcms.com/) (интегрирована прямо в Next.js App Router)
+- **База данных:** [PostgreSQL](https://www.postgresql.org/) (через `@payloadcms/db-postgres`)
+- **Стилизация:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Редактор текста:** Lexical RichText
+- **Хранилище медиа:** Vercel Blob Storage / Локальное хранилище
+- **Тестирование:** Vitest (интеграционные) & Playwright (E2E)
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+## 🚀 Быстрый старт
 
-### Development
+### Требования
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+Для запуска проекта убедитесь, что у вас установлены:
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+- **Node.js**: `v18.20.2+` или `>=20.9.0`
+- **Менеджер пакетов**: `pnpm` (версии 9 или 10)
+- Служба базы данных PostgreSQL
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+### Установка
 
-#### Docker (Optional)
+1. **Клонируйте репозиторий:**
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+   ```bash
+   git clone <url-репозитория>
+   cd cyprus-new-view
+   ```
 
-To do so, follow these steps:
+2. **Настройте переменные окружения:**
+   Скопируйте пример файла конфигурации (если он есть):
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+   ```bash
+   cp .env.example .env
+   ```
 
-## How it works
+   _Не забудьте открыть `.env` и обновить значения переменных, включая строку подключения к вашей базе данных PostgreSQL (`DATABASE_URI`) и секретный ключ (`PAYLOAD_SECRET`)._
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+3. **Установите зависимости:**
 
-### Collections
+   ```bash
+   pnpm install
+   ```
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+4. **Запустите режим разработки:**
+   ```bash
+   pnpm dev
+   ```
 
-- #### Users (Authentication)
+После запуска:
 
-  Users are auth-enabled collections that have access to the admin panel.
+- Приложение будет доступно по адресу: **[http://localhost:3000](http://localhost:3000)**
+- Админ-панель Payload CMS по адресу: **[http://localhost:3000/admin](http://localhost:3000/admin)** _(при первом входе система предложит создать администратора)_.
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+## 📂 Структура проекта
 
-- #### Media
+```text
+cyprus-new-view/
+├── src/
+│   ├── app/                # Роутинг Next.js (App Router)
+│   │   ├── (frontend)/     # Публичные страницы сайта (Hero, About, FAQ и др.)
+│   │   └── (payload)/      # Роуты, относящиеся к встроенной Payload CMS и API
+│   ├── components/         # Переиспользуемые React-компоненты
+│   └── payload.config.ts   # Главный конфигурационный файл Payload CMS
+├── package.json            # Зависимости и скрипты проекта
+└── tailwind.config.ts      # (Или конфигурация Tailwind)
+```
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+## 📜 Доступные скрипты
 
-### Docker
+- `pnpm dev` — Запуск приложения в режиме разработки.
+- `pnpm devsafe` — Очистка кеша Next.js (`.next`) и безопасный запуск сервера разработки.
+- `pnpm build` — Применение миграций базы данных и полная сборка проекта для продакшена.
+- `pnpm start` — Запуск собранного проекта.
+- `pnpm payload` — Доступ к CLI встроенного Payload CMS.
+- `pnpm lint` — Запуск проверки кода (ESLint).
+- `pnpm test` — Запуск всех тестов (Unit, Integration и E2E).
+- `pnpm generate:types` — Генерация TypeScript типов на основе коллекций Payload CMS.
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+## 🌟 Лицензия
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+Этот проект распространяется под лицензией **MIT**. Подробности см. в файле [LICENSE](LICENSE) (при наличии).
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+---
 
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+_Создано для проекта Cyprus New View — Открывая Кипр по-новому._
