@@ -5,6 +5,7 @@ import * as migration_20260207_130100_seed_about_us from './20260207_130100_seed
 import * as migration_20260207_130200_seed_faq from './20260207_130200_seed_faq';
 import * as migration_20260207_130300_seed_testimonials from './20260207_130300_seed_testimonials';
 import * as migration_20260207_130400_seed_footer from './20260207_130400_seed_footer';
+import * as migration_20260225_132421 from './20260225_132421';
 
 export const migrations = [
   {
@@ -35,11 +36,16 @@ export const migrations = [
   {
     up: migration_20260207_130300_seed_testimonials.up,
     down: migration_20260207_130300_seed_testimonials.down,
-    name: '20260207_130300_seed_testimonials'
+    name: '20260207_130300_seed_testimonials',
   },
   {
     up: migration_20260207_130400_seed_footer.up,
     down: migration_20260207_130400_seed_footer.down,
-    name: '20260207_130400_seed_footer'
+    name: '20260207_130400_seed_footer',
+  },
+  {
+    up: migration_20260225_132421.up,
+    down: migration_20260225_132421.down,
+    name: '20260225_132421'
   },
 ];
