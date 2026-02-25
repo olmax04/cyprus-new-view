@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { Phone } from 'lucide-react'
 import LanguageToggle from '@/components/ui/LanguageToggle'
 
@@ -80,9 +81,15 @@ export default function Header({ locale, nav }: HeaderProps) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
                 setIsMobileMenuOpen(false)
               }}
-              className="text-3xl md:text-[2.35rem] text-[#C5A059] font-serif tracking-widest leading-none relative font-medium cursor-pointer"
+              className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center cursor-pointer -ml-4"
             >
-              V<span className="absolute left-3 top-1">R</span>
+              <Image
+                src="/logo.svg"
+                alt="Cyprus Real Estate Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </button>
           </div>
 
@@ -126,23 +133,17 @@ export default function Header({ locale, nav }: HeaderProps) {
               <div className="relative w-6 h-5 overflow-visible">
                 <span
                   className={`absolute left-0 w-full h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
-                    isMobileMenuOpen
-                      ? 'top-1/2 -translate-y-1/2 rotate-45'
-                      : 'top-0'
+                    isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
                   }`}
                 />
                 <span
                   className={`absolute left-0 top-1/2 -translate-y-1/2 h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
-                    isMobileMenuOpen
-                      ? 'w-0 opacity-0'
-                      : 'w-4 opacity-100'
+                    isMobileMenuOpen ? 'w-0 opacity-0' : 'w-4 opacity-100'
                   }`}
                 />
                 <span
                   className={`absolute left-0 w-full h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
-                    isMobileMenuOpen
-                      ? 'top-1/2 -translate-y-1/2 -rotate-45'
-                      : 'bottom-0'
+                    isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
                   }`}
                 />
               </div>
@@ -159,9 +160,7 @@ export default function Header({ locale, nav }: HeaderProps) {
       {/* Mobile menu overlay */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
-          isMobileMenuOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         {/* Background */}
@@ -189,13 +188,17 @@ export default function Header({ locale, nav }: HeaderProps) {
           {/* Logo */}
           <div
             className={`mb-12 transition-all duration-500 delay-100 ${
-              isMobileMenuOpen
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 -translate-y-6'
+              isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'
             }`}
           >
-            <div className="text-5xl text-[#C5A059] font-serif tracking-widest leading-none relative font-medium">
-              V<span className="absolute left-5 top-1">R</span>
+            <div className="relative w-40 h-40 mb-2 flex items-center justify-center">
+              <Image
+                src="/logo.svg"
+                alt="Cyprus Real Estate Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
             <div className="mt-4 w-16 h-px mx-auto bg-gradient-to-r from-transparent via-[#C5A059]/60 to-transparent" />
           </div>
@@ -206,9 +209,7 @@ export default function Header({ locale, nav }: HeaderProps) {
               <div
                 key={item.id}
                 className={`w-full transition-all duration-500 ${
-                  isMobileMenuOpen
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
+                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{
                   transitionDelay: isMobileMenuOpen ? `${200 + index * 100}ms` : '0ms',
@@ -241,9 +242,7 @@ export default function Header({ locale, nav }: HeaderProps) {
           {/* Decorative rhombus */}
           <div
             className={`my-10 transition-all duration-500 delay-500 ${
-              isMobileMenuOpen
-                ? 'opacity-100 scale-100 rotate-45'
-                : 'opacity-0 scale-0 rotate-0'
+              isMobileMenuOpen ? 'opacity-100 scale-100 rotate-45' : 'opacity-0 scale-0 rotate-0'
             }`}
           >
             <div className="w-3 h-3 border border-[#C5A059]/50 bg-[#C5A059]/10" />
@@ -255,23 +254,17 @@ export default function Header({ locale, nav }: HeaderProps) {
             rel="noopener noreferrer"
             target="_blank"
             className={`flex items-center gap-3 text-white/70 hover:text-[#C5A059] transition-all duration-500 delay-600 ${
-              isMobileMenuOpen
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-4'
+              isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
             <Phone className="w-5 h-5 text-[#C5A059]" />
-            <span className="font-sans text-sm tracking-wider">
-              {nav.whatsappLabel}
-            </span>
+            <span className="font-sans text-sm tracking-wider">{nav.whatsappLabel}</span>
           </a>
 
           {/* Language toggle */}
           <div
             className={`mt-6 transition-all duration-500 delay-700 ${
-              isMobileMenuOpen
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-4'
+              isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
             <LanguageToggle locale={locale} />

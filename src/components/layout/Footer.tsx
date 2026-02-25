@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
 
 const socialIcons = {
@@ -26,7 +27,10 @@ export default async function Footer() {
   const social = footer?.social || []
 
   return (
-    <footer id="contact" className="relative bg-[#0a0508] border-t border-[#C5A059]/10 overflow-hidden">
+    <footer
+      id="contact"
+      className="relative bg-[#0a0508] border-t border-[#C5A059]/10 overflow-hidden"
+    >
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#C5A059]/5 rounded-full blur-[120px] animate-[pulse_16s_ease-in-out_infinite]" />
@@ -38,12 +42,14 @@ export default async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-12 mb-12">
           {/* Логотип и описание */}
           <div className="lg:col-span-4">
-            <h3
-              className="text-2xl md:text-3xl font-light text-white mb-4"
-              style={{ fontFamily: 'var(--font-serif)' }}
-            >
-              {footer?.logo || 'Cyprus Real Estate'}
-            </h3>
+            <div className="relative w-48 h-24 md:w-64 md:h-32 mb-8 -ml-6">
+              <Image
+                src="/logo.svg"
+                alt={typeof footer?.logo === 'string' ? footer.logo : 'Cyprus Real Estate'}
+                fill
+                className="object-contain object-left"
+              />
+            </div>
             <p
               className="text-white/60 text-sm leading-relaxed mb-6"
               style={{ fontFamily: 'var(--font-sans)' }}
@@ -155,7 +161,8 @@ export default async function Footer() {
             className="text-white/40 text-xs md:text-sm"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
-            {footer?.copyright || `© ${new Date().getFullYear()} Cyprus Real Estate. All rights reserved.`}
+            {footer?.copyright ||
+              `© ${new Date().getFullYear()} Cyprus Real Estate. All rights reserved.`}
           </p>
         </div>
       </div>
