@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { Phone } from 'lucide-react'
 import LanguageToggle from '@/components/ui/LanguageToggle'
+import EstatesDropdown from './EstatesDropdown'
 
 type HeaderProps = {
   locale: 'en' | 'ru' | 'sk'
@@ -33,6 +36,8 @@ const scrollToSection = (sectionId: string) => {
 export default function Header({ locale, nav }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,11 +62,21 @@ export default function Header({ locale, nav }: HeaderProps) {
   }, [isMobileMenuOpen])
 
   const handleNavClick = (sectionId: string) => {
-    scrollToSection(sectionId)
     setIsMobileMenuOpen(false)
+    if (pathname === '/') {
+      scrollToSection(sectionId)
+    } else {
+      router.push(`/#${sectionId}`)
+    }
   }
 
   const navItems = [
+    {
+      id: 'estates',
+      label: locale === 'ru' ? 'Объекты' : locale === 'sk' ? 'Nehnuteľnosti' : 'Estates',
+      isLink: true,
+      href: '/estates',
+    },
     { id: 'about', label: nav.aboutLabel },
     { id: 'faq', label: nav.faqLabel },
     { id: 'contact', label: nav.contactLabel },
@@ -77,9 +92,17 @@ export default function Header({ locale, nav }: HeaderProps) {
         <div className="flex items-center justify-between px-6 md:px-16 py-6 md:py-8 h-20 md:h-24">
           <div className="md:w-[6%] md:flex md:justify-center">
             <button
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+              onClick={(e) => {
+                e.preventDefault()
                 setIsMobileMenuOpen(false)
+                if (pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                } else {
+                  window.dispatchEvent(new Event('trigger-splash'))
+                  setTimeout(() => {
+                    router.push('/')
+                  }, 100)
+                }
               }}
               className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center cursor-pointer -ml-4"
             >
@@ -94,17 +117,39 @@ export default function Header({ locale, nav }: HeaderProps) {
           </div>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-12 font-sans text-white/90 text-[1.0625rem] tracking-wide font-light">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className="hover:text-[#C5A059] transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#C5A059] transition-all group-hover:w-full" />
-              </button>
-            ))}
+          <nav className="hidden md:flex items-center gap-12 font-sans text-white/90 text-[1.0625rem] tracking-wide font-light h-full">
+            {navItems.map((item) => {
+              if (item.id === 'estates') {
+                return (
+                  <div key={item.id} className="h-full flex items-center">
+                    <EstatesDropdown locale={locale} label={item.label} />
+                  </div>
+                )
+              }
+
+              return item.isLink ? (
+                <Link
+                  key={item.id}
+                  href={item.href!}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`hover:text-[#C5A059] transition-colors relative group ${pathname === item.href ? 'text-[#C5A059]' : ''}`}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px bg-[#C5A059] transition-all ${pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`}
+                  />
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className="hover:text-[#C5A059] transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#C5A059] transition-all group-hover:w-full" />
+                </button>
+              )
+            })}
           </nav>
 
           <div className="flex items-center gap-6">
@@ -150,9 +195,13 @@ export default function Header({ locale, nav }: HeaderProps) {
             </button>
           </div>
         </div>
+        {/* Static thin line at the top */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent" />
+
+        {/* Animated thicker gradient line on scroll */}
         <div
-          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4b26a] to-transparent transition-opacity duration-500 ${
-            isScrolled ? 'opacity-80' : 'opacity-0'
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#d4b26a] to-transparent transition-all duration-700 ease-in-out origin-center ${
+            isScrolled ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'
           }`}
         />
       </header>
@@ -191,7 +240,21 @@ export default function Header({ locale, nav }: HeaderProps) {
               isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'
             }`}
           >
-            <div className="relative w-40 h-40 mb-2 flex items-center justify-center">
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                setIsMobileMenuOpen(false)
+                if (pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                } else {
+                  window.dispatchEvent(new Event('trigger-splash'))
+                  setTimeout(() => {
+                    router.push('/')
+                  }, 100)
+                }
+              }}
+              className="relative w-40 h-40 mb-2 flex items-center justify-center cursor-pointer mx-auto"
+            >
               <Image
                 src="/logo.svg"
                 alt="Cyprus Real Estate Logo"
@@ -199,7 +262,7 @@ export default function Header({ locale, nav }: HeaderProps) {
                 className="object-contain"
                 priority
               />
-            </div>
+            </button>
             <div className="mt-4 w-16 h-px mx-auto bg-gradient-to-r from-transparent via-[#C5A059]/60 to-transparent" />
           </div>
 
@@ -215,21 +278,44 @@ export default function Header({ locale, nav }: HeaderProps) {
                   transitionDelay: isMobileMenuOpen ? `${200 + index * 100}ms` : '0ms',
                 }}
               >
-                <button
-                  onClick={() => handleNavClick(item.id)}
-                  className="group w-full py-5 flex items-center justify-center relative"
-                >
-                  {/* Hover background */}
-                  <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
+                {item.isLink ? (
+                  <Link
+                    href={item.href!}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group w-full py-5 flex items-center justify-center relative"
+                  >
+                    {/* Hover background */}
+                    <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
 
-                  {/* Label */}
-                  <span className="relative font-serif text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[#C5A059] transition-colors duration-300">
-                    {item.label}
-                  </span>
+                    {/* Label */}
+                    <span
+                      className={`relative font-serif text-2xl tracking-[0.15em] uppercase font-light transition-colors duration-300 ${pathname === item.href ? 'text-[#C5A059]' : 'text-white/90 group-active:text-[#C5A059]'}`}
+                    >
+                      {item.label}
+                    </span>
 
-                  {/* Decorative dot */}
-                  <span className="absolute right-4 w-1.5 h-1.5 rotate-45 border border-[#C5A059]/30 group-active:border-[#C5A059]/60 transition-colors" />
-                </button>
+                    {/* Decorative dot */}
+                    <span
+                      className={`absolute right-4 w-1.5 h-1.5 rotate-45 border transition-colors ${pathname === item.href ? 'border-[#C5A059]/60' : 'border-[#C5A059]/30 group-active:border-[#C5A059]/60'}`}
+                    />
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handleNavClick(item.id)}
+                    className="group w-full py-5 flex items-center justify-center relative"
+                  >
+                    {/* Hover background */}
+                    <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
+
+                    {/* Label */}
+                    <span className="relative font-serif text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[#C5A059] transition-colors duration-300">
+                      {item.label}
+                    </span>
+
+                    {/* Decorative dot */}
+                    <span className="absolute right-4 w-1.5 h-1.5 rotate-45 border border-[#C5A059]/30 group-active:border-[#C5A059]/60 transition-colors" />
+                  </button>
+                )}
 
                 {/* Separator line */}
                 {index < navItems.length - 1 && (

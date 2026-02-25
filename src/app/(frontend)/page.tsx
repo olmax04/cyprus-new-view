@@ -3,7 +3,6 @@ import AboutUs from '@/components/sections/about/AboutUs'
 import SectionDivider from '@/components/sections/divider/SectionDivider'
 import Testimonials from '@/components/sections/testimonials/Testimonials'
 import FAQ from '@/components/sections/faq/FAQ'
-import Footer from '@/components/layout/Footer'
 
 export default async function Page() {
   return (
@@ -13,7 +12,6 @@ export default async function Page() {
       <SectionDivider />
       <Testimonials />
       <FAQ />
-      <Footer />
     </div>
   )
 }

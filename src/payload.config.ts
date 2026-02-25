@@ -8,6 +8,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Estates } from './collections/Estates'
 import { Hero } from './globals/Hero'
 import { AboutUs } from './globals/AboutUs'
 import { Testimonials } from './globals/Testimonials'
@@ -24,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Estates],
   globals: [Hero, AboutUs, Testimonials, FAQ, Footer],
   editor: lexicalEditor(),
   localization: {
