@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 interface SplashScreenProps {
   onComplete: () => void
@@ -36,25 +37,20 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
       </div>
 
       <div className="relative z-10">
-        <div className="absolute inset-0 -m-12 rounded-full bg-[#C5A059]/20 blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-2 border-[#C5A059]/30 animate-[spin_20s_linear_infinite]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full border border-[#C5A059]/20 animate-[spin_25s_linear_infinite_reverse]" />
+        <div className="relative flex flex-col items-center justify-center">
+          <div className="absolute inset-0 -m-12 rounded-full bg-[#C5A059]/20 blur-3xl animate-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-[#C5A059]/30 animate-[spin_20s_linear_infinite]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 rounded-full border border-[#C5A059]/20 animate-[spin_25s_linear_infinite_reverse]" />
 
-        <div className="relative text-[8rem] font-serif tracking-wider font-medium">
-          <div className="relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#d4b26a] via-[#BB9A31] to-[#6E5B1D] drop-shadow-[0_0_30px_rgba(197,160,89,0.5)]">
-              V<span className="absolute left-12 top-2">R</span>
-            </span>
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32">
-              <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent animate-pulse" />
-            </div>
+          <div className="relative w-56 h-56 md:w-72 md:h-72 flex flex-col items-center justify-center">
+            <Image
+              src="/logo.svg"
+              alt="Cyprus Real Estate"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
-        </div>
-
-        <div className="mt-16 text-center">
-          <p className="text-[#C5A059] text-sm uppercase tracking-[0.3em] font-sans">
-            Cyprus Real Estate
-          </p>
         </div>
 
         <div className="flex justify-center gap-2 mt-8">
