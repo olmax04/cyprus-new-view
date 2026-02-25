@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers'
 import { Cormorant_Garamond, Lato } from 'next/font/google'
 import { getPayload } from 'payload'
-import Header from '@/components/layout/Header'
 import HeroDiamonds from '@/components/sections/hero/HeroDiamonds'
 import HeroWrapper from '@/components/sections/hero/HeroWrapper'
 import config from '@/payload.config'
@@ -68,7 +67,6 @@ export default async function Hero() {
       className={`relative min-h-screen w-full overflow-hidden bg-[#2a0f1b] ${serifFont.variable} ${sansFont.variable}`}
     >
       <HeroDiamonds />
-      <Header locale={locale} nav={nav} />
       <HeroWrapper
         title={title}
         stats={stats}

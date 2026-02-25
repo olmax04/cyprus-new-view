@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    estates: Estate;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    estates: EstatesSelect<false> | EstatesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -198,6 +200,46 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "estates".
+ */
+export interface Estate {
+  id: number;
+  title: string;
+  location: string;
+  description?: string | null;
+  propertyType: 'villa' | 'apartment' | 'townhouse' | 'penthouse';
+  transactionType: 'sale' | 'rent';
+  /**
+   * Number of bedrooms
+   */
+  rooms?: number | null;
+  /**
+   * Area in square meters (m²)
+   */
+  area?: number | null;
+  /**
+   * Formatted price for display, e.g., "€1,200,000"
+   */
+  price: string;
+  /**
+   * Numeric price used specifically for filtering ranges (e.g. 1200000)
+   */
+  priceValue?: number | null;
+  image: number | Media;
+  /**
+   * Additional images for the estate page
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -227,6 +269,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'estates';
+        value: number | Estate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -343,6 +389,30 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "estates_select".
+ */
+export interface EstatesSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  description?: T;
+  propertyType?: T;
+  transactionType?: T;
+  rooms?: T;
+  area?: T;
+  price?: T;
+  priceValue?: T;
+  image?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
