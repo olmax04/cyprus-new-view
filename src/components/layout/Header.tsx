@@ -85,12 +85,16 @@ export default function Header({ locale, nav }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'bg-[#12070c]/70' : 'bg-[#12070c]/20'
-        } backdrop-blur-md`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 md:pointer-events-auto ${
+          isMobileMenuOpen
+            ? 'bg-transparent pointer-events-none'
+            : isScrolled
+              ? 'bg-[#12070c]/70 backdrop-blur-md'
+              : 'bg-[#12070c]/20 backdrop-blur-md'
+        }`}
       >
-        <div className="flex items-center justify-between px-6 md:px-16 py-6 md:py-8 h-20 md:h-24">
-          <div className="md:w-[6%] md:flex md:justify-center">
+        <div className="flex items-center justify-between px-6 md:px-8 lg:px-16 py-6 md:py-8 h-20 md:h-24">
+          <div className="flex-shrink-0 md:flex md:justify-center mr-4 lg:mr-0">
             <button
               onClick={(e) => {
                 e.preventDefault()
@@ -104,7 +108,9 @@ export default function Header({ locale, nav }: HeaderProps) {
                   }, 100)
                 }
               }}
-              className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center cursor-pointer -ml-4"
+              className={`relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex items-center justify-center cursor-pointer lg:-ml-4 transition-opacity duration-300 pointer-events-auto ${
+                isMobileMenuOpen ? 'opacity-0 md:opacity-100' : 'opacity-100'
+              }`}
             >
               <Image
                 src="/logo.svg"
@@ -117,7 +123,7 @@ export default function Header({ locale, nav }: HeaderProps) {
           </div>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-12 font-sans text-white/90 text-[1.0625rem] tracking-wide font-light h-full">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-12 font-sans text-white/90 text-[0.9375rem] lg:text-[1.0625rem] tracking-wide font-light h-full whitespace-nowrap">
             {navItems.map((item) => {
               if (item.id === 'estates') {
                 return (
@@ -152,7 +158,7 @@ export default function Header({ locale, nav }: HeaderProps) {
             })}
           </nav>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0">
             <a
               className="hidden md:flex items-center gap-2 text-white/90 hover:text-[#C5A059] transition-colors"
               href={nav.whatsappUrl || '#'}
@@ -160,7 +166,7 @@ export default function Header({ locale, nav }: HeaderProps) {
               target="_blank"
             >
               <Phone className="w-5 h-5 md:w-6 md:h-6 text-[#C5A059]" />
-              <span className="font-sans text-[0.9375rem] md:text-[1.0625rem] font-light hidden sm:inline">
+              <span className="font-sans text-[0.9375rem] lg:text-[1.0625rem] font-light hidden xl:inline">
                 {nav.whatsappLabel}
               </span>
             </a>
@@ -171,7 +177,7 @@ export default function Header({ locale, nav }: HeaderProps) {
 
             {/* Animated burger button */}
             <button
-              className="md:hidden relative w-8 h-8 flex items-center justify-center z-[60]"
+              className="md:hidden relative w-8 h-8 flex items-center justify-center z-[60] pointer-events-auto"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -196,13 +202,17 @@ export default function Header({ locale, nav }: HeaderProps) {
           </div>
         </div>
         {/* Static thin line at the top */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent" />
+        <div
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent transition-opacity duration-300 ${
+            isMobileMenuOpen ? 'opacity-0 md:opacity-100' : 'opacity-100'
+          }`}
+        />
 
         {/* Animated thicker gradient line on scroll */}
         <div
           className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#d4b26a] to-transparent transition-all duration-700 ease-in-out origin-center ${
-            isScrolled ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'
-          }`}
+            isScrolled && !isMobileMenuOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'
+          } md:${isScrolled ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'}`}
         />
       </header>
 
@@ -233,10 +243,10 @@ export default function Header({ locale, nav }: HeaderProps) {
         </div>
 
         {/* Menu content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] overflow-y-auto px-6 sm:px-8 py-20 pb-24">
           {/* Logo */}
           <div
-            className={`mb-12 transition-all duration-500 delay-100 ${
+            className={`mb-8 sm:mb-12 transition-all duration-500 delay-100 ${
               isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'
             }`}
           >
@@ -253,7 +263,7 @@ export default function Header({ locale, nav }: HeaderProps) {
                   }, 100)
                 }
               }}
-              className="relative w-40 h-40 mb-2 flex items-center justify-center cursor-pointer mx-auto"
+              className="relative w-32 h-32 sm:w-40 sm:h-40 mb-2 flex items-center justify-center cursor-pointer mx-auto"
             >
               <Image
                 src="/logo.svg"
@@ -282,14 +292,14 @@ export default function Header({ locale, nav }: HeaderProps) {
                   <Link
                     href={item.href!}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="group w-full py-5 flex items-center justify-center relative"
+                    className="group w-full py-4 sm:py-5 flex items-center justify-center relative"
                   >
                     {/* Hover background */}
                     <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
 
                     {/* Label */}
                     <span
-                      className={`relative font-serif text-2xl tracking-[0.15em] uppercase font-light transition-colors duration-300 ${pathname === item.href ? 'text-[#C5A059]' : 'text-white/90 group-active:text-[#C5A059]'}`}
+                      className={`relative font-serif text-xl sm:text-2xl tracking-[0.15em] uppercase font-light transition-colors duration-300 ${pathname === item.href ? 'text-[#C5A059]' : 'text-white/90 group-active:text-[#C5A059]'}`}
                     >
                       {item.label}
                     </span>
@@ -302,13 +312,13 @@ export default function Header({ locale, nav }: HeaderProps) {
                 ) : (
                   <button
                     onClick={() => handleNavClick(item.id)}
-                    className="group w-full py-5 flex items-center justify-center relative"
+                    className="group w-full py-4 sm:py-5 flex items-center justify-center relative"
                   >
                     {/* Hover background */}
                     <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
 
                     {/* Label */}
-                    <span className="relative font-serif text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[#C5A059] transition-colors duration-300">
+                    <span className="relative font-serif text-xl sm:text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[#C5A059] transition-colors duration-300">
                       {item.label}
                     </span>
 
@@ -327,7 +337,7 @@ export default function Header({ locale, nav }: HeaderProps) {
 
           {/* Decorative rhombus */}
           <div
-            className={`my-10 transition-all duration-500 delay-500 ${
+            className={`my-6 sm:my-10 transition-all duration-500 delay-500 ${
               isMobileMenuOpen ? 'opacity-100 scale-100 rotate-45' : 'opacity-0 scale-0 rotate-0'
             }`}
           >
@@ -349,7 +359,7 @@ export default function Header({ locale, nav }: HeaderProps) {
 
           {/* Language toggle */}
           <div
-            className={`mt-6 transition-all duration-500 delay-700 ${
+            className={`mt-4 sm:mt-6 transition-all duration-500 delay-700 ${
               isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >

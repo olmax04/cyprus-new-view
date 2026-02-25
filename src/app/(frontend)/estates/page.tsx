@@ -155,15 +155,15 @@ export default async function EstatesPage({ searchParams }: EstatesPageProps) {
             })}
           </div>
         ) : (
-          <div className="py-20 text-center border-t border-b border-[#C5A059]/10 bg-[#12070c]/30 rounded-lg">
-            <h3 className="text-2xl font-serif text-white/90 mb-2 tracking-wide group-hover:text-[#C5A059] transition-colors">
+          <div className="py-12 sm:py-20 px-4 sm:px-8 text-center border-t border-b border-[#C5A059]/10 bg-[#12070c]/30 rounded-lg">
+            <h3 className="text-lg sm:text-2xl font-serif text-white/90 mb-2 tracking-wide group-hover:text-[#C5A059] transition-colors">
               {locale === 'ru'
                 ? 'Нет соответствующих объектов'
                 : locale === 'sk'
                   ? 'Žiadne zodpovedajúce nehnuteľnosti'
                   : 'No matching Estates found'}
             </h3>
-            <p className="text-white/50 font-sans">
+            <p className="text-sm sm:text-base text-white/50 font-sans">
               {locale === 'ru'
                 ? 'Попробуйте изменить параметры поиска.'
                 : locale === 'sk'
