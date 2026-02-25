@@ -6,6 +6,7 @@ import * as migration_20260207_130200_seed_faq from './20260207_130200_seed_faq'
 import * as migration_20260207_130300_seed_testimonials from './20260207_130300_seed_testimonials';
 import * as migration_20260207_130400_seed_footer from './20260207_130400_seed_footer';
 import * as migration_20260225_132421 from './20260225_132421';
+import * as migration_20260225_210129_add_estates_collection from './20260225_210129_add_estates_collection';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20260225_132421.up,
     down: migration_20260225_132421.down,
-    name: '20260225_132421'
+    name: '20260225_132421',
+  },
+  {
+    up: migration_20260225_210129_add_estates_collection.up,
+    down: migration_20260225_210129_add_estates_collection.down,
+    name: '20260225_210129_add_estates_collection'
   },
 ];
