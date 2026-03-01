@@ -30,29 +30,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         secondaryLabel: 'Watch Video',
         searchLabel: 'Find',
       },
-      search: {
-        cityLabel: 'City',
-        propertyLabel: 'Property Type',
-        budgetLabel: 'Budget',
-        cities: [
-          { label: 'Limassol' },
-          { label: 'Paphos' },
-          { label: 'Larnaca' },
-          { label: 'Nicosia' },
-        ],
-        propertyTypes: [
-          { label: 'Villa' },
-          { label: 'Apartment' },
-          { label: 'Penthouse' },
-          { label: 'Land' },
-        ],
-        budgets: [
-          { label: '€100k - €250k' },
-          { label: '€250k - €500k' },
-          { label: '€500k - €1M' },
-          { label: '€1M+' },
-        ],
-      },
       galleryCards: [],
     },
   })
@@ -100,24 +77,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         secondaryLabel: 'Видео',
         searchLabel: 'Найти',
       },
-      search: {
-        cityLabel: 'Город',
-        propertyLabel: 'Тип недвижимости',
-        budgetLabel: 'Бюджет',
-        cities: mapWithIds(hero.search?.cities || [], ['Лимассол', 'Пафос', 'Ларнака', 'Никосия']),
-        propertyTypes: mapWithIds(hero.search?.propertyTypes || [], [
-          'Вилла',
-          'Апартаменты',
-          'Пентхаус',
-          'Земля',
-        ]),
-        budgets: mapWithIds(hero.search?.budgets || [], [
-          '€100k - €250k',
-          '€250k - €500k',
-          '€500k - €1M',
-          '€1M+',
-        ]),
-      },
       galleryCards: [],
     },
   })
@@ -151,24 +110,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         secondaryLabel: 'Pozrieť video',
         searchLabel: 'Hľadať',
       },
-      search: {
-        cityLabel: 'Mesto',
-        propertyLabel: 'Typ nehnuteľnosti',
-        budgetLabel: 'Rozpočet',
-        cities: mapWithIds(hero.search?.cities || [], ['Limassol', 'Paphos', 'Larnaka', 'Nicosia']),
-        propertyTypes: mapWithIds(hero.search?.propertyTypes || [], [
-          'Vila',
-          'Apartmán',
-          'Penthouse',
-          'Pozemok',
-        ]),
-        budgets: mapWithIds(hero.search?.budgets || [], [
-          '€100k - €250k',
-          '€250k - €500k',
-          '€500k - €1M',
-          '€1M+',
-        ]),
-      },
       galleryCards: [],
     },
   })
@@ -190,14 +131,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
       primaryLabel: '',
       secondaryLabel: '',
       searchLabel: '',
-    },
-    search: {
-      cityLabel: '',
-      propertyLabel: '',
-      budgetLabel: '',
-      cities: [],
-      propertyTypes: [],
-      budgets: [],
     },
     galleryCards: [],
   }
