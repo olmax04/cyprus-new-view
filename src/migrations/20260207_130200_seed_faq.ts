@@ -1,8 +1,12 @@
 import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
-  const seeds = {
-    en: {
+  // Step 1: Seed default locale (en) first
+  await payload.updateGlobal({
+    slug: 'faq',
+    req,
+    locale: 'en',
+    data: {
       heading: 'Frequently Asked Questions',
       subheading: 'Got Questions?',
       items: [
@@ -48,10 +52,31 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         },
       ],
     },
-    ru: {
+  })
+
+  // Step 2: Read back to get auto-generated IDs
+  const faq = await payload.findGlobal({
+    slug: 'faq',
+    req,
+    locale: 'en',
+  })
+
+  const buildItems = (items: any[], translations: { question: string; answer: string }[]) =>
+    items.map((item: any, i: number) => ({
+      id: item.id,
+      question: translations[i].question,
+      answer: translations[i].answer,
+    }))
+
+  // Step 3: Update Russian locale
+  await payload.updateGlobal({
+    slug: 'faq',
+    req,
+    locale: 'ru',
+    data: {
       heading: 'Часто задаваемые вопросы',
       subheading: 'Есть вопросы?',
-      items: [
+      items: buildItems(faq.items || [], [
         {
           question: 'Каковы требования для покупки недвижимости на Кипре?',
           answer:
@@ -92,12 +117,19 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           answer:
             'Большинство объектов на Кипре находятся в полной собственности, то есть вы владеете и недвижимостью, и землей. Это обеспечивает полные права собственности и делает недвижимость отличной долгосрочной инвестицией.',
         },
-      ],
+      ]),
     },
-    sk: {
+  })
+
+  // Step 4: Update Slovak locale
+  await payload.updateGlobal({
+    slug: 'faq',
+    req,
+    locale: 'sk',
+    data: {
       heading: 'Často kladené otázky',
       subheading: 'Máte otázky?',
-      items: [
+      items: buildItems(faq.items || [], [
         {
           question: 'Aké su požiadavky na kúpu nehnuteľnosti na Cypre?',
           answer:
@@ -138,19 +170,9 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           answer:
             'Väčšina nehnuteľností na Cypre je vo voľnom vlastníctve, čo znamená, že vlastníte nehnuteľnosť aj pozemok. To poskytuje úplné vlastnícke práva a robí z nehnuteľností vynikajúce dlhodobé investície.',
         },
-      ],
+      ]),
     },
-  }
-
-  // Create or update faq global for each locale
-  for (const [locale, data] of Object.entries(seeds)) {
-    await payload.updateGlobal({
-      slug: 'faq',
-      req,
-      locale: locale as 'en' | 'ru' | 'sk',
-      data,
-    })
-  }
+  })
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {

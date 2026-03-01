@@ -1,8 +1,12 @@
 import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
-  const seeds = {
-    en: {
+  // Step 1: Seed default locale (en) first
+  await payload.updateGlobal({
+    slug: 'testimonials',
+    req,
+    locale: 'en',
+    data: {
       heading: 'What Our Clients Say',
       subheading: 'Testimonials',
       items: [
@@ -35,7 +39,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           role: 'Architect',
           country: 'France',
           content:
-            "Exceptional experience buying our retirement home in Paphos. They understood our needs perfectly and showed us only properties that matched our criteria. The after-sales support has been wonderful.",
+            'Exceptional experience buying our retirement home in Paphos. They understood our needs perfectly and showed us only properties that matched our criteria. The after-sales support has been wonderful.',
           rating: 5,
         },
         {
@@ -56,17 +60,43 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         },
       ],
     },
-    ru: {
+  })
+
+  // Step 2: Read back to get auto-generated IDs
+  const testimonials = await payload.findGlobal({
+    slug: 'testimonials',
+    req,
+    locale: 'en',
+  })
+
+  const buildItems = (
+    items: any[],
+    translations: { name: string; role: string; country: string; content: string }[],
+  ) =>
+    items.map((item: any, i: number) => ({
+      id: item.id,
+      rating: item.rating,
+      name: translations[i].name,
+      role: translations[i].role,
+      country: translations[i].country,
+      content: translations[i].content,
+    }))
+
+  // Step 3: Update Russian locale
+  await payload.updateGlobal({
+    slug: 'testimonials',
+    req,
+    locale: 'ru',
+    data: {
       heading: 'Отзывы наших клиентов',
       subheading: 'Отзывы',
-      items: [
+      items: buildItems(testimonials.items || [], [
         {
           name: 'Михаил Андерсон',
           role: 'Генеральный директор',
           country: 'Великобритания',
           content:
             'Выдающийся сервис от начала до конца. Команда помогла нам найти идеальную виллу в Лимассоле и безупречно оформила всю юридическую документацию. Наши инвестиции выросли на 15% всего за два года.',
-          rating: 5,
         },
         {
           name: 'Елена Петрова',
@@ -74,7 +104,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Россия',
           content:
             'Профессиональный подход и внимание к деталям впечатлили с первой встречи. Нашли идеальную квартиру с видом на море. Полное сопровождение сделки и помощь в получении ВНЖ. Рекомендую всем!',
-          rating: 5,
         },
         {
           name: 'Ханс Шмидт',
@@ -82,7 +111,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Германия',
           content:
             'Приобрел три апартамента для инвестиций. Команда предоставила отличный анализ рынка и услуги по управлению недвижимостью. Доходность от аренды превзошла мои ожидания. Очень профессиональное агентство.',
-          rating: 5,
         },
         {
           name: 'Софи Дюбуа',
@@ -90,7 +118,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Франция',
           content:
             'Исключительный опыт покупки дома для выхода на пенсию в Пафосе. Они идеально поняли наши потребности и показали только те объекты, которые соответствовали нашим критериям. Послепродажная поддержка была замечательной.',
-          rating: 5,
         },
         {
           name: 'Дмитрий Иванов',
@@ -98,7 +125,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Россия',
           content:
             'Купил виллу для семьи через это агентство. Прозрачность на всех этапах, честные цены, никаких скрытых комиссий. Помогли с оформлением всех документов. Через год купил еще одну недвижимость для сдачи в аренду.',
-          rating: 5,
         },
         {
           name: 'Джеймс Уилсон',
@@ -106,21 +132,26 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'США',
           content:
             'Как американец, покупающий недвижимость за границей, у меня было много опасений. Команда ответила на каждый вопрос с терпением и экспертностью. Весь процесс был гладким, прозрачным и профессиональным. Теперь живу своей мечтой на Кипре!',
-          rating: 5,
         },
-      ],
+      ]),
     },
-    sk: {
+  })
+
+  // Step 4: Update Slovak locale
+  await payload.updateGlobal({
+    slug: 'testimonials',
+    req,
+    locale: 'sk',
+    data: {
       heading: 'Čo hovoria naši klienti',
       subheading: 'Referencie',
-      items: [
+      items: buildItems(testimonials.items || [], [
         {
           name: 'Michael Anderson',
           role: 'Generálny riaditeľ',
           country: 'Spojené kráľovstvo',
           content:
-            'Vynikajúce služby od začiatku do konца. Tím nám pomohol najsť perfektnú vilu v Limassole a bezproblémovo vybavil všetky právne dokumenty. Naša investícia sa za dva roky zhodnotila o 15%.',
-          rating: 5,
+            'Vynikajúce služby od začiatku do konca. Tím nám pomohol najsť perfektnú vilu v Limassole a bezproblémovo vybavil všetky právne dokumenty. Naša investícia sa za dva roky zhodnotila o 15%.',
         },
         {
           name: 'Elena Petrova',
@@ -128,7 +159,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Rusko',
           content:
             'Profesionálny prístup a pozornosť k detailom ma zapôsobila od prvého stretnutia. Našli ideálny byt s výhľadom na more. Kompletné sprevádzanie transakcie a pomoc pri získaní pobytu. Odporúčam všetkým!',
-          rating: 5,
         },
         {
           name: 'Hans Schmidt',
@@ -136,7 +166,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Nemecko',
           content:
             'Kúpil som tri apartmány na investičné účely. Tím poskytol vynikajúcu analýzu trhu a služby správy nehnuteľností. Výnosy z prenájmu predčili moje očakávania. Veľmi profesionálna agentúra.',
-          rating: 5,
         },
         {
           name: 'Sophie Dubois',
@@ -144,7 +173,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Francúzsko',
           content:
             'Výnimočná zkúsenosť pri kúpe nášho dôchodkového domu v Paphos. Perfektne pochopili naše potreby a ukázali nám len nehnuteľnosti, ktoré zodpovedali našim kritériám. Popredajná podpora bola úžasná.',
-          rating: 5,
         },
         {
           name: 'Dmitry Ivanov',
@@ -152,7 +180,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'Rusko',
           content:
             'Kúpil som vilu pre rodinu prostredníctvom tejto agentúry. Transparentnosť vo všetkých fázach, férové ceny, žiadne skryté poplatky. Pomohli s vybavením všetkých dokumentov. O rok som kúpil ďalšiu nehnuteľnosť na prenájom.',
-          rating: 5,
         },
         {
           name: 'James Wilson',
@@ -160,21 +187,10 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           country: 'USA',
           content:
             'Ako Američan kupujúci v zahraničí som mal mnoho obáv. Tím riešil každú otázku s trpezlivosťou a odbornosťou. Celý proces bol hladký, transparentný a profesionálny. Teraz žijem svoj sen na Cypre!',
-          rating: 5,
         },
-      ],
+      ]),
     },
-  }
-
-  // Create or update testimonials global for each locale
-  for (const [locale, data] of Object.entries(seeds)) {
-    await payload.updateGlobal({
-      slug: 'testimonials',
-      req,
-      locale: locale as 'en' | 'ru' | 'sk',
-      data,
-    })
-  }
+  })
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
