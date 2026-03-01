@@ -1,8 +1,12 @@
 import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
-  const seeds = {
-    en: {
+  // Step 1: Seed default locale (en) first — creates the global and all array items
+  await payload.updateGlobal({
+    slug: 'hero',
+    req,
+    locale: 'en',
+    data: {
       nav: {
         aboutLabel: 'About Us',
         faqLabel: 'FAQ',
@@ -30,7 +34,12 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         cityLabel: 'City',
         propertyLabel: 'Property Type',
         budgetLabel: 'Budget',
-        cities: [{ label: 'Limassol' }, { label: 'Paphos' }, { label: 'Larnaca' }, { label: 'Nicosia' }],
+        cities: [
+          { label: 'Limassol' },
+          { label: 'Paphos' },
+          { label: 'Larnaca' },
+          { label: 'Nicosia' },
+        ],
         propertyTypes: [
           { label: 'Villa' },
           { label: 'Apartment' },
@@ -46,7 +55,28 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
       },
       galleryCards: [],
     },
-    ru: {
+  })
+
+  // Step 2: Read the global back to get auto-generated IDs
+  const hero = await payload.findGlobal({
+    slug: 'hero',
+    req,
+    locale: 'en',
+  })
+
+  // Helper: map array items preserving IDs
+  const mapWithIds = (items: any[], labels: string[]) =>
+    items.map((item: any, i: number) => ({ id: item.id, label: labels[i] }))
+
+  const mapWithIdsValueLabel = (items: any[], data: { value: string; label: string }[]) =>
+    items.map((item: any, i: number) => ({ id: item.id, ...data[i] }))
+
+  // Step 3: Update Russian locale — reuse existing array item IDs
+  await payload.updateGlobal({
+    slug: 'hero',
+    req,
+    locale: 'ru',
+    data: {
       nav: {
         aboutLabel: 'О нас',
         faqLabel: 'Вопросы',
@@ -55,16 +85,16 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         whatsappUrl: 'https://wa.me/35700000000',
       },
       title: { line1: 'КИПР', line2: 'НЕДВИЖИМОСТЬ', line3: 'ПРЕМИУМ' },
-      stats: [
+      stats: mapWithIdsValueLabel(hero.stats || [], [
         { value: '150+', label: 'Объектов' },
         { value: '10 лет', label: 'На рынке' },
         { value: '12% ROI', label: 'Средняя' },
-      ],
-      categories: [
-        { label: 'Люксовые виллы' },
-        { label: 'Апартаменты у моря' },
-        { label: 'Инвестиции' },
-      ],
+      ]),
+      categories: mapWithIds(hero.categories || [], [
+        'Люксовые виллы',
+        'Апартаменты у моря',
+        'Инвестиции',
+      ]),
       buttons: {
         primaryLabel: 'Смотреть',
         secondaryLabel: 'Видео',
@@ -74,28 +104,30 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         cityLabel: 'Город',
         propertyLabel: 'Тип недвижимости',
         budgetLabel: 'Бюджет',
-        cities: [
-          { label: 'Лимассол' },
-          { label: 'Пафос' },
-          { label: 'Ларнака' },
-          { label: 'Никосия' },
-        ],
-        propertyTypes: [
-          { label: 'Вилла' },
-          { label: 'Апартаменты' },
-          { label: 'Пентхаус' },
-          { label: 'Земля' },
-        ],
-        budgets: [
-          { label: '€100k - €250k' },
-          { label: '€250k - €500k' },
-          { label: '€500k - €1M' },
-          { label: '€1M+' },
-        ],
+        cities: mapWithIds(hero.search?.cities || [], ['Лимассол', 'Пафос', 'Ларнака', 'Никосия']),
+        propertyTypes: mapWithIds(hero.search?.propertyTypes || [], [
+          'Вилла',
+          'Апартаменты',
+          'Пентхаус',
+          'Земля',
+        ]),
+        budgets: mapWithIds(hero.search?.budgets || [], [
+          '€100k - €250k',
+          '€250k - €500k',
+          '€500k - €1M',
+          '€1M+',
+        ]),
       },
       galleryCards: [],
     },
-    sk: {
+  })
+
+  // Step 4: Update Slovak locale — reuse existing array item IDs
+  await payload.updateGlobal({
+    slug: 'hero',
+    req,
+    locale: 'sk',
+    data: {
       nav: {
         aboutLabel: 'O nás',
         faqLabel: 'FAQ',
@@ -104,16 +136,16 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         whatsappUrl: 'https://wa.me/35700000000',
       },
       title: { line1: 'CYPRUS', line2: 'REAL', line3: 'ESTATE' },
-      stats: [
+      stats: mapWithIdsValueLabel(hero.stats || [], [
         { value: '150+', label: 'Ponuky' },
         { value: '10 rokov', label: 'Na trhu' },
         { value: '12% ROI', label: 'Priemer' },
-      ],
-      categories: [
-        { label: 'Luxusné vily' },
-        { label: 'Byty pri mori' },
-        { label: 'Investície' },
-      ],
+      ]),
+      categories: mapWithIds(hero.categories || [], [
+        'Luxusné vily',
+        'Byty pri mori',
+        'Investície',
+      ]),
       buttons: {
         primaryLabel: 'Preskúmať',
         secondaryLabel: 'Pozrieť video',
@@ -123,42 +155,26 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         cityLabel: 'Mesto',
         propertyLabel: 'Typ nehnuteľnosti',
         budgetLabel: 'Rozpočet',
-        cities: [
-          { label: 'Limassol' },
-          { label: 'Paphos' },
-          { label: 'Larnaka' },
-          { label: 'Nicosia' },
-        ],
-        propertyTypes: [
-          { label: 'Vila' },
-          { label: 'Apartmán' },
-          { label: 'Penthouse' },
-          { label: 'Pozemok' },
-        ],
-        budgets: [
-          { label: '€100k - €250k' },
-          { label: '€250k - €500k' },
-          { label: '€500k - €1M' },
-          { label: '€1M+' },
-        ],
+        cities: mapWithIds(hero.search?.cities || [], ['Limassol', 'Paphos', 'Larnaka', 'Nicosia']),
+        propertyTypes: mapWithIds(hero.search?.propertyTypes || [], [
+          'Vila',
+          'Apartmán',
+          'Penthouse',
+          'Pozemok',
+        ]),
+        budgets: mapWithIds(hero.search?.budgets || [], [
+          '€100k - €250k',
+          '€250k - €500k',
+          '€500k - €1M',
+          '€1M+',
+        ]),
       },
       galleryCards: [],
     },
-  }
-
-  // Create or update hero global for each locale
-  for (const [locale, data] of Object.entries(seeds)) {
-    await payload.updateGlobal({
-      slug: 'hero',
-      req,
-      locale: locale as 'en' | 'ru' | 'sk',
-      data,
-    })
-  }
+  })
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
-  // Reset to default empty state
   const emptyData = {
     nav: {
       aboutLabel: '',
