@@ -85,11 +85,11 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
 
       {/* Main Dropdown */}
       <div
-        className={`absolute top-full left-0 mt-4 w-56 bg-[#0a0508]/95 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-top-left ${
+        className={`absolute top-full left-0 mt-2.5 w-64 z-10 bg-[#0a0508]/95 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-top-left ${
           isOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
         }`}
       >
-        <div className="absolute -top-4 left-0 w-full h-4 bg-transparent" />{' '}
+        <div className="absolute -top-2.5 left-0 w-full h-2.5 bg-transparent" />{' '}
         {/* Invisible hover bridge */}
         <ul className="py-2">
           {/* View All Option */}
@@ -125,7 +125,7 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
 
               {/* Sub-menu (Property Types) */}
               <div
-                className={`absolute top-0 left-full ml-1 w-48 bg-[#0a0508]/98 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-left ${
+                className={`absolute top-0 left-full ml-1 w-56 bg-[#0a0508]/98 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-left ${
                   activeTransaction === trans.id
                     ? 'opacity-100 scale-100 visible'
                     : 'opacity-0 scale-95 invisible'
