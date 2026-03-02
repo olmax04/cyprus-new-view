@@ -7,6 +7,7 @@ import bgImage from '../../../../figma/bgImage.png'
 import EstateCard from '@/components/ui/EstateCard'
 import EstatesFilter from '@/components/ui/EstatesFilter'
 import type { Media } from '@/payload-types'
+import { formatPrice } from '@/utils/formatPrice'
 
 export const metadata = {
   title: 'Luxury Estates',
@@ -41,12 +42,12 @@ export default async function EstatesPage({ searchParams }: EstatesPageProps) {
 
   // Handle Price Min/Max
   if (params.minPrice || params.maxPrice) {
-    where.priceValue = {}
+    where.price = {}
     if (params.minPrice && typeof params.minPrice === 'string') {
-      where.priceValue.greater_than_equal = parseInt(params.minPrice, 10)
+      where.price.greater_than_equal = parseInt(params.minPrice, 10)
     }
     if (params.maxPrice && typeof params.maxPrice === 'string') {
-      where.priceValue.less_than_equal = parseInt(params.maxPrice, 10)
+      where.price.less_than_equal = parseInt(params.maxPrice, 10)
     }
   }
 
@@ -113,7 +114,7 @@ export default async function EstatesPage({ searchParams }: EstatesPageProps) {
 
         {/* Estates Grid */}
         {estates.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-0">
             {estates.map((estate) => {
               const image = estate.image as Media | { url: string } | null
               const imageUrl =
@@ -135,21 +136,26 @@ export default async function EstatesPage({ searchParams }: EstatesPageProps) {
                 rent: locale === 'ru' ? 'Аренда' : locale === 'sk' ? 'Na prenájom' : 'For Rent',
               }
 
+              const viewLabel =
+                locale === 'ru' ? 'Подробнее' : locale === 'sk' ? 'Zobraziť' : 'View Estate'
+
               return (
                 <EstateCard
                   key={estate.id}
                   id={estate.id}
+                  slug={estate.slug}
                   title={estate.title}
                   location={estate.location}
-                  description={estate.description || undefined}
+                  description={undefined}
                   propertyType={estate.propertyType ? propTypeMap[estate.propertyType] : undefined}
                   transactionType={
                     estate.transactionType ? transTypeMap[estate.transactionType] : undefined
                   }
                   rooms={estate.rooms || undefined}
                   area={estate.area || undefined}
-                  price={estate.price}
+                  price={formatPrice(estate.price, estate.currency)}
                   imageUrl={imageUrl}
+                  viewLabel={viewLabel}
                 />
               )
             })}

@@ -128,7 +128,7 @@ export default function EstatesFilter({ locale }: EstatesFilterProps) {
     'w-full bg-[#0a0508]/80 border border-[#C5A059]/20 hover:border-[#C5A059]/50 text-white text-sm rounded-sm px-4 py-3 focus:outline-none focus:border-[#C5A059] transition-all duration-300 placeholder:text-white/20 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0'
 
   return (
-    <div className="w-full bg-[#12070c]/80 backdrop-blur-md border border-[#C5A059]/30 rounded-lg p-6 mb-12 shadow-2xl relative z-30">
+    <div className="w-full bg-[#12070c]/80 backdrop-blur-md border border-[#C5A059]/30 rounded-lg p-6 mb-12 shadow-2xl relative z-40">
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Core Filters */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -1,20 +1,104 @@
 import type { CollectionConfig } from 'payload'
 
+const slugify = (text: string): string =>
+  text
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
+
+// Role helpers
+const isAdmin = (user: any) => user?.role === 'administrator'
+const isManagerOrAbove = (user: any) => ['manager', 'administrator'].includes(user?.role)
+
 export const Estates: CollectionConfig = {
   slug: 'estates',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'propertyType', 'transactionType', 'price', 'updatedAt'],
+    defaultColumns: [
+      'title',
+      'assignedTo',
+      'propertyType',
+      'transactionType',
+      'price',
+      'updatedAt',
+    ],
   },
   access: {
-    read: () => true, // Anyone can read estates
+    // Anyone can read estates (public frontend)
+    read: () => true,
+
+    // Any authenticated user can create estates
+    create: ({ req: { user } }) => !!user,
+
+    // Employee: only own estates | Manager: any estate | Admin: any estate
+    update: ({ req: { user } }) => {
+      if (!user) return false
+      if (isManagerOrAbove(user)) return true
+      // Employee: can only update estates assigned to them
+      return {
+        assignedTo: { equals: user.id },
+      }
+    },
+
+    // Only managers and admins can delete
+    delete: ({ req: { user } }) => {
+      if (!user) return false
+      if (isManagerOrAbove(user)) return true
+      return false
+    },
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data, req, operation }) => {
+        if (data && !data.slug && data.title) {
+          data.slug = slugify(data.title)
+        }
+        if (operation === 'create' && req.user && !data?.assignedTo) {
+          data!.assignedTo = req.user.id
+        }
+        return data
+      },
+    ],
   },
   fields: [
     {
       name: 'title',
       type: 'text',
       required: true,
-      localized: true, // Needs to support ru, en, sk
+      localized: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: 'URL-friendly identifier. Auto-generated from title if left empty.',
+      },
+    },
+    {
+      name: 'assignedTo',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: 'The user responsible for this estate',
+      },
+      access: {
+        // Only managers and admins can change the assigned user
+        update: ({ req: { user } }) => isManagerOrAbove(user),
+      },
     },
     {
       name: 'location',
@@ -24,7 +108,7 @@ export const Estates: CollectionConfig = {
     },
     {
       name: 'description',
-      type: 'textarea',
+      type: 'richText',
       localized: true,
     },
     {
@@ -72,21 +156,29 @@ export const Estates: CollectionConfig = {
       ],
     },
     {
-      name: 'price',
-      type: 'text',
-      required: true,
-      localized: true,
-      admin: {
-        description: 'Formatted price for display, e.g., "€1,200,000"',
-      },
-    },
-    {
-      name: 'priceValue',
-      type: 'number',
-      admin: {
-        description: 'Numeric price used specifically for filtering ranges (e.g. 1200000)',
-      },
-      index: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'price',
+          type: 'number',
+          required: true,
+          index: true,
+          admin: {
+            description: 'Numeric price value (e.g. 1200000)',
+          },
+        },
+        {
+          name: 'currency',
+          type: 'select',
+          required: true,
+          defaultValue: 'EUR',
+          options: [
+            { label: '€ EUR', value: 'EUR' },
+            { label: '$ USD', value: 'USD' },
+            { label: '£ GBP', value: 'GBP' },
+          ],
+        },
+      ],
     },
     {
       name: 'image',
