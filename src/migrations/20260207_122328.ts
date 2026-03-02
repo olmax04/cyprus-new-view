@@ -1,6 +1,7 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  await db.execute(sql`CREATE SCHEMA IF NOT EXISTS "public";`)
   await db.execute(sql`
    CREATE TYPE "public"."_locales" AS ENUM('en', 'ru', 'sk');
   CREATE TABLE "users_sessions" (
