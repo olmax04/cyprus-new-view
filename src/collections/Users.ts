@@ -62,5 +62,12 @@ export const Users: CollectionConfig = {
         description: 'Display name of the user',
       },
     },
+    {
+      name: 'phone',
+      type: 'text',
+      admin: {
+        description: 'Contact phone number visible to clients',
+      },
+    },
   ],
 }

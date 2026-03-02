@@ -10,6 +10,7 @@ import * as migration_20260225_210129_add_estates_collection from './20260225_21
 import * as migration_20260302_000221_add_slug_and_richtext_description from './20260302_000221_add_slug_and_richtext_description';
 import * as migration_20260302_003045_add_user_roles_and_estate_assignment from './20260302_003045_add_user_roles_and_estate_assignment';
 import * as migration_20260302_172817_replace_price_text_with_number_and_currency from './20260302_172817_replace_price_text_with_number_and_currency';
+import * as migration_20260302_174545_user_employee_contact_data from './20260302_174545_user_employee_contact_data';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20260302_172817_replace_price_text_with_number_and_currency.up,
     down: migration_20260302_172817_replace_price_text_with_number_and_currency.down,
-    name: '20260302_172817_replace_price_text_with_number_and_currency'
+    name: '20260302_172817_replace_price_text_with_number_and_currency',
+  },
+  {
+    up: migration_20260302_174545_user_employee_contact_data.up,
+    down: migration_20260302_174545_user_employee_contact_data.down,
+    name: '20260302_174545_user_employee_contact_data'
   },
 ];

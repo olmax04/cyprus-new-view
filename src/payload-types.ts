@@ -142,6 +142,10 @@ export interface User {
    * Display name of the user
    */
   name?: string | null;
+  /**
+   * Contact phone number visible to clients
+   */
+  phone?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -350,6 +354,7 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   role?: T;
   name?: T;
+  phone?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

@@ -5,8 +5,8 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { cookies } from 'next/headers'
-import { ArrowLeft, BedDouble, Maximize, MapPin, Tag, TrendingUp } from 'lucide-react'
-import type { Media } from '@/payload-types'
+import { ArrowLeft, BedDouble, Maximize, MapPin, Tag, TrendingUp, Phone, Mail, User } from 'lucide-react'
+import type { Media, User as UserType } from '@/payload-types'
 import bgImage from '../../../../../figma/bgImage.png'
 import RichTextRenderer from '@/components/ui/RichTextRenderer'
 import EstateGallery from '@/components/ui/EstateGallery'
@@ -53,6 +53,11 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
 
   const estate = docs[0]
   if (!estate) notFound()
+
+  const agent =
+    estate.assignedTo && typeof estate.assignedTo === 'object'
+      ? (estate.assignedTo as UserType)
+      : null
 
   const mainImage = estate.image as Media | null
   const mainImageUrl =
@@ -101,14 +106,22 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
     location: locale === 'ru' ? 'Местоположение' : locale === 'sk' ? 'Lokalita' : 'Location',
     price: locale === 'ru' ? 'Цена' : locale === 'sk' ? 'Cena' : 'Price',
     contact:
-      locale === 'ru' ? 'Связаться с нами' : locale === 'sk' ? 'Kontaktujte nás' : 'Contact Us',
+      locale === 'ru' ? 'Связаться' : locale === 'sk' ? 'Kontaktovať' : 'Contact',
     interested:
       locale === 'ru'
-        ? 'Заинтересованы в этом объекте?'
+        ? 'Ваш персональный агент'
         : locale === 'sk'
-          ? 'Máte záujem o túto nehnuteľnosť?'
-          : 'Interested in this property?',
+          ? 'Váš osobný agent'
+          : 'Your Personal Agent',
     contactDesc:
+      locale === 'ru'
+        ? 'Свяжитесь с агентом для получения дополнительной информации или для планирования просмотра.'
+        : locale === 'sk'
+          ? 'Kontaktujte agenta pre viac informácií alebo na naplánovanie prehliadky.'
+          : 'Contact the agent for more information or to schedule a viewing.',
+    contactFallback:
+      locale === 'ru' ? 'Связаться с нами' : locale === 'sk' ? 'Kontaktujte nás' : 'Contact Us',
+    contactFallbackDesc:
       locale === 'ru'
         ? 'Свяжитесь с нами для получения дополнительной информации или для планирования просмотра.'
         : locale === 'sk'
@@ -290,19 +303,62 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                 </div>
               </div>
 
-              {/* Contact CTA */}
-              <div className="bg-gradient-to-br from-[#C5A059]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8">
-                <h3 className="text-white font-serif text-lg tracking-wide mb-2">{t.interested}</h3>
-                <p className="text-white/50 text-sm font-sans leading-relaxed mb-5">
-                  {t.contactDesc}
-                </p>
-                <Link
-                  href="/#contact"
-                  className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d4b26a] text-[#12070c] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#C5A059]/20 text-center block"
-                >
-                  {t.contact}
-                </Link>
-              </div>
+              {/* Agent Contact Card */}
+              {agent ? (
+                <div className="bg-gradient-to-br from-[#C5A059]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8">
+                  <h3 className="text-white font-serif text-lg tracking-wide mb-1">{t.interested}</h3>
+                  <p className="text-white/50 text-sm font-sans leading-relaxed mb-5">
+                    {t.contactDesc}
+                  </p>
+
+                  {/* Agent info */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-11 h-11 rounded-full bg-[#C5A059]/20 border border-[#C5A059]/30 flex items-center justify-center shrink-0">
+                      <User className="w-5 h-5 text-[#C5A059]" />
+                    </div>
+                    <div>
+                      <span className="text-white font-sans text-sm font-medium block">
+                        {agent.name || agent.email}
+                      </span>
+                      {agent.name && (
+                        <span className="text-white/40 font-sans text-xs">{agent.email}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2.5">
+                    {agent.phone && (
+                      <a
+                        href={`tel:${agent.phone.replace(/\s/g, '')}`}
+                        className="flex items-center gap-3 w-full py-3 px-4 bg-[#C5A059] hover:bg-[#d4b26a] text-[#12070c] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#C5A059]/20"
+                      >
+                        <Phone className="w-4 h-4" />
+                        {agent.phone}
+                      </a>
+                    )}
+                    <a
+                      href={`mailto:${agent.email}`}
+                      className="flex items-center gap-3 w-full py-3 px-4 border border-[#C5A059]/40 text-[#C5A059] hover:bg-[#C5A059]/10 font-sans font-medium text-sm tracking-wider rounded-sm transition-all duration-300"
+                    >
+                      <Mail className="w-4 h-4" />
+                      {agent.email}
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-gradient-to-br from-[#C5A059]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8">
+                  <h3 className="text-white font-serif text-lg tracking-wide mb-2">{t.contactFallback}</h3>
+                  <p className="text-white/50 text-sm font-sans leading-relaxed mb-5">
+                    {t.contactFallbackDesc}
+                  </p>
+                  <Link
+                    href="/#contact"
+                    className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d4b26a] text-[#12070c] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#C5A059]/20 text-center block"
+                  >
+                    {t.contact}
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
