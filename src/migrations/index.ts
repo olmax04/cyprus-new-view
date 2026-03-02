@@ -7,6 +7,9 @@ import * as migration_20260207_130300_seed_testimonials from './20260207_130300_
 import * as migration_20260207_130400_seed_footer from './20260207_130400_seed_footer';
 import * as migration_20260225_132421 from './20260225_132421';
 import * as migration_20260225_210129_add_estates_collection from './20260225_210129_add_estates_collection';
+import * as migration_20260302_000221_add_slug_and_richtext_description from './20260302_000221_add_slug_and_richtext_description';
+import * as migration_20260302_003045_add_user_roles_and_estate_assignment from './20260302_003045_add_user_roles_and_estate_assignment';
+import * as migration_20260302_172817_replace_price_text_with_number_and_currency from './20260302_172817_replace_price_text_with_number_and_currency';
 
 export const migrations = [
   {
@@ -52,6 +55,21 @@ export const migrations = [
   {
     up: migration_20260225_210129_add_estates_collection.up,
     down: migration_20260225_210129_add_estates_collection.down,
-    name: '20260225_210129_add_estates_collection'
+    name: '20260225_210129_add_estates_collection',
+  },
+  {
+    up: migration_20260302_000221_add_slug_and_richtext_description.up,
+    down: migration_20260302_000221_add_slug_and_richtext_description.down,
+    name: '20260302_000221_add_slug_and_richtext_description',
+  },
+  {
+    up: migration_20260302_003045_add_user_roles_and_estate_assignment.up,
+    down: migration_20260302_003045_add_user_roles_and_estate_assignment.down,
+    name: '20260302_003045_add_user_roles_and_estate_assignment',
+  },
+  {
+    up: migration_20260302_172817_replace_price_text_with_number_and_currency.up,
+    down: migration_20260302_172817_replace_price_text_with_number_and_currency.down,
+    name: '20260302_172817_replace_price_text_with_number_and_currency'
   },
 ];

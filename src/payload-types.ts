@@ -134,6 +134,14 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  /**
+   * User role determines access permissions
+   */
+  role: 'employee' | 'manager' | 'administrator';
+  /**
+   * Display name of the user
+   */
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -205,8 +213,30 @@ export interface Media {
 export interface Estate {
   id: number;
   title: string;
+  /**
+   * URL-friendly identifier. Auto-generated from title if left empty.
+   */
+  slug: string;
+  /**
+   * The user responsible for this estate
+   */
+  assignedTo: number | User;
   location: string;
-  description?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   propertyType: 'villa' | 'apartment' | 'townhouse' | 'penthouse';
   transactionType: 'sale' | 'rent';
   /**
@@ -218,13 +248,10 @@ export interface Estate {
    */
   area?: number | null;
   /**
-   * Formatted price for display, e.g., "€1,200,000"
+   * Numeric price value (e.g. 1200000)
    */
-  price: string;
-  /**
-   * Numeric price used specifically for filtering ranges (e.g. 1200000)
-   */
-  priceValue?: number | null;
+  price: number;
+  currency: 'EUR' | 'USD' | 'GBP';
   image: number | Media;
   /**
    * Additional images for the estate page
@@ -321,6 +348,8 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -396,6 +425,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface EstatesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
+  assignedTo?: T;
   location?: T;
   description?: T;
   propertyType?: T;
@@ -403,7 +434,7 @@ export interface EstatesSelect<T extends boolean = true> {
   rooms?: T;
   area?: T;
   price?: T;
-  priceValue?: T;
+  currency?: T;
   image?: T;
   gallery?:
     | T

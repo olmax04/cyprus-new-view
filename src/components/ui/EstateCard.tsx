@@ -1,9 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { BedDouble, Maximize } from 'lucide-react'
 
 interface EstateCardProps {
   id: string | number
+  slug: string
   title: string
   location: string
   price: string
@@ -13,10 +15,12 @@ interface EstateCardProps {
   rooms?: number
   area?: number
   imageUrl?: string
+  viewLabel?: string
 }
 
 export default function EstateCard({
   id,
+  slug,
   title,
   location,
   description,
@@ -26,9 +30,13 @@ export default function EstateCard({
   area,
   price,
   imageUrl,
+  viewLabel = 'View Estate',
 }: EstateCardProps) {
   return (
-    <div className="group bg-[#12070c]/60 rounded-lg overflow-hidden border border-[#C5A059]/10 hover:border-[#C5A059]/30 transition-all duration-500 h-[28rem] flex flex-col hover:-translate-y-1">
+    <Link
+      href={`/estates/${slug}`}
+      className="group bg-[#12070c]/60 rounded-lg overflow-hidden border border-[#C5A059]/10 hover:border-[#C5A059]/30 transition-all duration-500 h-[28rem] flex flex-col hover:-translate-y-1 cursor-pointer"
+    >
       <div className="h-48 bg-[#0a0508] flex items-center justify-center relative overflow-hidden shrink-0">
         {imageUrl ? (
           <Image
@@ -61,9 +69,9 @@ export default function EstateCard({
 
         {/* Hover Action Button */}
         <div className="absolute inset-0 flex items-center justify-center z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-          <button className="px-6 py-2.5 bg-[#C5A059]/90 hover:bg-[#C5A059] text-[#12070c] font-sans font-medium text-sm tracking-wider uppercase rounded-sm transition-colors duration-300 backdrop-blur-md">
-            View Estate
-          </button>
+          <span className="px-6 py-2.5 bg-[#C5A059]/90 hover:bg-[#C5A059] text-[#12070c] font-sans font-medium text-sm tracking-wider uppercase rounded-sm transition-colors duration-300 backdrop-blur-md">
+            {viewLabel}
+          </span>
         </div>
 
         <div className="absolute inset-0 bg-[#C5A059]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
@@ -115,6 +123,6 @@ export default function EstateCard({
           <div className="w-12 h-[1px] bg-gradient-to-r from-[#C5A059]/40 to-transparent group-hover:w-20 transition-all duration-500" />
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

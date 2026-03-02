@@ -172,7 +172,7 @@ export default function HeroContent({
                   }`}
                 >
                   <div className="flex flex-wrap md:grid md:grid-cols-2 items-center gap-4">
-                    <Button label={buttons.primaryLabel} />
+                    <Button label={buttons.primaryLabel} href="/estates" />
                     <WatchVideoButton label={buttons.secondaryLabel} />
                   </div>
                 </div>
