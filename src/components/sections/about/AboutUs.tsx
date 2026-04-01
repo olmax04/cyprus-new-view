@@ -22,10 +22,10 @@ export default async function AboutUs() {
   const imageSrc = image?.url
 
   return (
-    <section id="about" className="relative py-16 md:py-24 lg:py-32 bg-[#12070c] overflow-hidden">
+    <section id="about" className="relative py-16 md:py-24 lg:py-32 bg-[var(--color-bg-surface)] overflow-hidden">
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C5A059]/5 rounded-full blur-[120px] animate-[pulse_10s_ease-in-out_infinite]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-accent)]/5 rounded-full blur-[120px] animate-[pulse_10s_ease-in-out_infinite]" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#7a4a24]/5 rounded-full blur-[140px] animate-[pulse_12s_ease-in-out_infinite]" />
       </div>
 
@@ -34,7 +34,7 @@ export default async function AboutUs() {
         <AnimatedSection animation="fade-up" delay={0} duration={1.2}>
           <div className="text-center mb-12 md:mb-16">
             {aboutUs?.subheading && (
-              <p className="text-[#C5A059] uppercase tracking-[0.3em] text-[0.8125rem] mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
+              <p className="text-[var(--color-accent)] uppercase tracking-[0.3em] text-[0.8125rem] mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
                 {aboutUs.subheading}
               </p>
             )}
@@ -57,7 +57,7 @@ export default async function AboutUs() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   {stats.map((stat, index) => (
                     <div key={index} className="text-center md:text-left">
-                      <div className="text-3xl md:text-4xl font-light text-[#C5A059] mb-2" style={{ fontFamily: 'var(--font-serif)' }}>
+                      <div className="text-3xl md:text-4xl font-light text-[var(--color-accent)] mb-2" style={{ fontFamily: 'var(--font-serif)' }}>
                         {stat.value}
                       </div>
                       <div className="text-[0.8125rem] uppercase tracking-[0.3em] text-white/50" style={{ fontFamily: 'var(--font-sans)' }}>
@@ -79,7 +79,7 @@ export default async function AboutUs() {
           {/* Изображение */}
           {imageSrc && (
             <AnimatedSection animation="fade-left" delay={500} duration={1.2}>
-              <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden border border-[#C5A059]/20">
+              <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden border border-[var(--color-accent)]/20">
                 <Image
                   src={imageSrc}
                   alt={aboutUs?.heading || 'About Us'}
@@ -103,10 +103,10 @@ export default async function AboutUs() {
 
               return (
                 <AnimatedSection key={index} animation="fade-up" delay={index * 150 + 400} duration={1}>
-                  <div className="group p-6 border border-[#C5A059]/20 bg-[#1a0b10]/30 backdrop-blur-sm hover:border-[#C5A059]/40 hover:scale-105 transition-all duration-300">
+                  <div className="group p-6 border border-[var(--color-accent)]/20 bg-[var(--color-bg-mid)]/30 backdrop-blur-sm hover:border-[var(--color-accent)]/40 hover:scale-105 transition-all duration-300">
                     {IconComponent && (
                       <div className="mb-4">
-                        <IconComponent className="w-10 h-10 text-[#C5A059] group-hover:scale-110 transition-transform duration-300" />
+                        <IconComponent className="w-10 h-10 text-[var(--color-accent)] group-hover:scale-110 transition-transform duration-300" />
                       </div>
                     )}
                     <h3 className="text-xl text-white mb-3 font-light" style={{ fontFamily: 'var(--font-serif)' }}>{feature.title}</h3>

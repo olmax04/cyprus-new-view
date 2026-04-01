@@ -43,13 +43,13 @@ export default function CustomSelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between bg-[#0a0508]/80 border border-[#C5A059]/20 hover:border-[#C5A059]/50 text-white text-sm rounded-sm px-4 py-3 focus:outline-none transition-all duration-300"
+        className="w-full flex items-center justify-between bg-[var(--color-bg-dark)]/80 border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 text-white text-sm rounded-sm px-4 py-3 focus:outline-none transition-all duration-300"
       >
         <span className={selectedOption ? 'text-white' : 'text-white/50'}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-[#C5A059] transition-transform duration-300 ${
+          className={`w-4 h-4 text-[var(--color-accent)] transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -57,7 +57,7 @@ export default function CustomSelect({
 
       {/* Dropdown Menu */}
       <div
-        className={`absolute z-50 w-full mt-2 bg-[#0a0508]/95 backdrop-blur-md border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 transform origin-top ${
+        className={`absolute z-50 w-full mt-2 bg-[var(--color-bg-dark)]/95 backdrop-blur-md border border-[var(--color-accent)]/30 rounded-sm shadow-2xl transition-all duration-300 transform origin-top ${
           isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'
         }`}
       >
@@ -69,8 +69,8 @@ export default function CustomSelect({
             }}
             className={`px-4 py-3 text-sm cursor-pointer transition-colors duration-200 ${
               value === ''
-                ? 'bg-[#C5A059]/20 text-[#C5A059]'
-                : 'text-white/70 hover:bg-[#C5A059]/10 hover:text-white'
+                ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]'
+                : 'text-white/70 hover:bg-[var(--color-accent)]/10 hover:text-white'
             }`}
           >
             {placeholder}
@@ -82,10 +82,10 @@ export default function CustomSelect({
                 onChange({ target: { name, value: opt.value } })
                 setIsOpen(false)
               }}
-              className={`px-4 py-3 text-sm cursor-pointer transition-colors duration-200 border-t border-[#C5A059]/5 ${
+              className={`px-4 py-3 text-sm cursor-pointer transition-colors duration-200 border-t border-[var(--color-accent)]/5 ${
                 value === opt.value
-                  ? 'bg-[#C5A059]/20 text-[#C5A059]'
-                  : 'text-white/70 hover:bg-[#C5A059]/10 hover:text-white'
+                  ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]'
+                  : 'text-white/70 hover:bg-[var(--color-accent)]/10 hover:text-white'
               }`}
             >
               {opt.label}

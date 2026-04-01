@@ -119,7 +119,7 @@ export default function EstateGallery({ images }: EstateGalleryProps) {
                 onClick={() => goTo(index)}
                 className={`relative w-20 h-14 md:w-24 md:h-16 rounded-md overflow-hidden flex-shrink-0 transition-all duration-300 ${
                   currentIndex === index
-                    ? 'ring-2 ring-[#C5A059] opacity-100 scale-105'
+                    ? 'ring-2 ring-[var(--color-accent)] opacity-100 scale-105'
                     : 'opacity-50 hover:opacity-80 ring-1 ring-white/10'
                 }`}
               >
@@ -204,7 +204,7 @@ export default function EstateGallery({ images }: EstateGalleryProps) {
                     onClick={() => setLightboxIndex(index)}
                     className={`relative w-14 h-10 md:w-16 md:h-12 rounded-md overflow-hidden flex-shrink-0 transition-all duration-300 ${
                       lightboxIndex === index
-                        ? 'ring-2 ring-[#C5A059] opacity-100'
+                        ? 'ring-2 ring-[var(--color-accent)] opacity-100'
                         : 'opacity-40 hover:opacity-70 ring-1 ring-white/10'
                     }`}
                   >

@@ -32,11 +32,11 @@ export default function SectionDivider() {
   }, [])
 
   return (
-    <div ref={ref} className="relative w-full py-0 bg-[#12070c] overflow-hidden">
+    <div ref={ref} className="relative w-full py-0 bg-[var(--color-bg-surface)] overflow-hidden">
       {/* Декоративные линии */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div
-          className={`w-full h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/40 to-transparent transition-all ease-out ${
+          className={`w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/40 to-transparent transition-all ease-out ${
             isVisible ? 'opacity-100 scale-x-100 duration-[1500ms]' : 'opacity-0 scale-x-0 duration-300'
           }`}
         />
@@ -45,7 +45,7 @@ export default function SectionDivider() {
       {/* Центральный элемент */}
       <div className="relative z-10 flex items-center justify-center gap-8 py-16 md:py-20">
         <div
-          className={`hidden md:block w-32 h-[1px] bg-gradient-to-r from-transparent to-[#C5A059]/60 transition-all ease-out ${
+          className={`hidden md:block w-32 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]/60 transition-all ease-out ${
             isVisible ? 'opacity-100 scale-x-100 duration-[1200ms] delay-300' : 'opacity-0 scale-x-0 duration-300'
           }`}
         />
@@ -56,12 +56,12 @@ export default function SectionDivider() {
             isVisible ? 'opacity-100 scale-100 rotate-45 duration-[800ms] delay-500' : 'opacity-0 scale-0 rotate-0 duration-300'
           }`}
         >
-          <div className="w-4 h-4 border border-[#C5A059] bg-[#C5A059]/20" />
-          <div className="absolute inset-0 w-4 h-4 border border-[#C5A059]/40 bg-[#C5A059]/10 blur-sm animate-pulse" />
+          <div className="w-4 h-4 border border-[var(--color-accent)] bg-[var(--color-accent)]/20" />
+          <div className="absolute inset-0 w-4 h-4 border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 blur-sm animate-pulse" />
         </div>
 
         <div
-          className={`hidden md:block w-32 h-[1px] bg-gradient-to-l from-transparent to-[#C5A059]/60 transition-all ease-out ${
+          className={`hidden md:block w-32 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]/60 transition-all ease-out ${
             isVisible ? 'opacity-100 scale-x-100 duration-[1200ms] delay-300' : 'opacity-0 scale-x-0 duration-300'
           }`}
         />
@@ -70,12 +70,12 @@ export default function SectionDivider() {
       {/* Декоративные точки */}
       <div className="absolute inset-0 flex items-center justify-center gap-4">
         <div
-          className={`absolute left-1/4 w-1 h-1 rounded-full bg-[#C5A059]/30 transition-all ease-out ${
+          className={`absolute left-1/4 w-1 h-1 rounded-full bg-[var(--color-accent)]/30 transition-all ease-out ${
             isVisible ? 'opacity-100 scale-100 duration-700 delay-700' : 'opacity-0 scale-0 duration-300'
           }`}
         />
         <div
-          className={`absolute right-1/4 w-1 h-1 rounded-full bg-[#C5A059]/30 transition-all ease-out ${
+          className={`absolute right-1/4 w-1 h-1 rounded-full bg-[var(--color-accent)]/30 transition-all ease-out ${
             isVisible ? 'opacity-100 scale-100 duration-700 delay-700' : 'opacity-0 scale-0 duration-300'
           }`}
         />
@@ -84,7 +84,7 @@ export default function SectionDivider() {
       {/* Фоновое свечение */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div
-          className={`w-[300px] h-[300px] bg-[#C5A059]/5 rounded-full blur-[100px] transition-all ease-out ${
+          className={`w-[300px] h-[300px] bg-[var(--color-accent)]/5 rounded-full blur-[100px] transition-all ease-out ${
             isVisible ? 'opacity-100 scale-100 duration-[1500ms]' : 'opacity-0 scale-0 duration-300'
           }`}
         />

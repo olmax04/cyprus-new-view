@@ -12,10 +12,10 @@ type FAQItemProps = {
 
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
-    <div className="border border-[#C5A059]/20 bg-[#1a0b10]/30 backdrop-blur-sm overflow-hidden transition-all duration-300">
+    <div className="border border-[var(--color-accent)]/20 bg-[var(--color-bg-mid)]/30 backdrop-blur-sm overflow-hidden transition-all duration-300">
       <button
         onClick={onToggle}
-        className="w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between text-left hover:bg-[#C5A059]/5 transition-colors"
+        className="w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between text-left hover:bg-[var(--color-accent)]/5 transition-colors"
       >
         <h3
           className="text-lg md:text-xl text-white font-light pr-4"
@@ -24,7 +24,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
           {question}
         </h3>
         <ChevronDown
-          className={`w-5 h-5 md:w-6 md:h-6 text-[#C5A059] flex-shrink-0 transition-transform duration-300 ${
+          className={`w-5 h-5 md:w-6 md:h-6 text-[var(--color-accent)] flex-shrink-0 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />

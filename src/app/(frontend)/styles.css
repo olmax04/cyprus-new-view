@@ -1,4 +1,37 @@
 @import "tailwindcss";
 
+/* ============================================================
+   COLOUR PROFILES
+   Switch themes by setting data-theme="crimson" on <html>.
+   Default (no attribute) = Bordeaux profile.
+   ============================================================ */
 
+/* --- Profile: Bordeaux (original dark burgundy) --- */
+:root {
+  --color-bg-hero:    #2a0f1b;   /* hero section background   */
+  --color-bg-surface: #12070c;   /* card / panel background   */
+  --color-bg-dark:    #0a0508;   /* deepest background layer  */
+  --color-bg-mid:     #1a0b10;   /* medium dark surface       */
+  --color-accent:     #C5A059;   /* gold accent               */
+  --color-accent-h:   #d4b26a;   /* gold hover / lighter      */
+}
+
+/* --- Profile: Crimson (Brighter: #8e264d ) --- */
+:root[data-theme="crimson"] {
+  --color-bg-hero:    #8e264d;   /* vivid bright crimson      */
+  --color-bg-surface: #50152c;   /* medium crimson surface    */
+  --color-bg-dark:    #2d0c18;   /* deepest layer             */
+  --color-bg-mid:     #3e1121;   /* medium dark surface       */
+  --color-accent:     #e8c881;   /* lighter gold accent       */
+  --color-accent-h:   #f5daa9;   /* lighter gold hover        */
+}
+
+@theme {
+  --color-bg-hero:    var(--color-bg-hero);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-dark:    var(--color-bg-dark);
+  --color-bg-mid:     var(--color-bg-mid);
+  --color-accent:     var(--color-accent);
+  --color-accent-h:   var(--color-accent-h);
+}
 

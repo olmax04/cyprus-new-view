@@ -29,11 +29,11 @@ export default async function Footer() {
   return (
     <footer
       id="contact"
-      className="relative bg-[#0a0508] border-t border-[#C5A059]/10 overflow-hidden"
+      className="relative bg-[var(--color-bg-dark)] border-t border-[var(--color-accent)]/10 overflow-hidden"
     >
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#C5A059]/5 rounded-full blur-[120px] animate-[pulse_16s_ease-in-out_infinite]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--color-accent)]/5 rounded-full blur-[120px] animate-[pulse_16s_ease-in-out_infinite]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#7a4a24]/5 rounded-full blur-[140px] animate-[pulse_18s_ease-in-out_infinite]" />
       </div>
 
@@ -67,9 +67,9 @@ export default async function Footer() {
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 flex items-center justify-center border border-[#C5A059]/30 hover:border-[#C5A059] hover:bg-[#C5A059]/10 hover:scale-110 transition-all duration-300"
+                      className="w-10 h-10 flex items-center justify-center border border-[var(--color-accent)]/30 hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 hover:scale-110 transition-all duration-300"
                     >
-                      <Icon className="w-4 h-4 text-[#C5A059]" />
+                      <Icon className="w-4 h-4 text-[var(--color-accent)]" />
                     </a>
                   ) : null
                 })}
@@ -91,7 +91,7 @@ export default async function Footer() {
                   <li key={linkIndex}>
                     <Link
                       href={link.url}
-                      className="text-white/60 hover:text-[#C5A059] text-sm transition-colors duration-300"
+                      className="text-white/60 hover:text-[var(--color-accent)] text-sm transition-colors duration-300"
                       style={{ fontFamily: 'var(--font-sans)' }}
                     >
                       {link.label}
@@ -114,10 +114,10 @@ export default async function Footer() {
               <ul className="space-y-4">
                 {footer.contact.phone && (
                   <li className="flex items-start gap-3">
-                    <Phone className="w-4 h-4 text-[#C5A059] mt-1 flex-shrink-0" />
+                    <Phone className="w-4 h-4 text-[var(--color-accent)] mt-1 flex-shrink-0" />
                     <a
                       href={`tel:${footer.contact.phone}`}
-                      className="text-white/60 hover:text-[#C5A059] text-sm transition-colors duration-300"
+                      className="text-white/60 hover:text-[var(--color-accent)] text-sm transition-colors duration-300"
                       style={{ fontFamily: 'var(--font-sans)' }}
                     >
                       {footer.contact.phone}
@@ -126,10 +126,10 @@ export default async function Footer() {
                 )}
                 {footer.contact.email && (
                   <li className="flex items-start gap-3">
-                    <Mail className="w-4 h-4 text-[#C5A059] mt-1 flex-shrink-0" />
+                    <Mail className="w-4 h-4 text-[var(--color-accent)] mt-1 flex-shrink-0" />
                     <a
                       href={`mailto:${footer.contact.email}`}
-                      className="text-white/60 hover:text-[#C5A059] text-sm transition-colors duration-300"
+                      className="text-white/60 hover:text-[var(--color-accent)] text-sm transition-colors duration-300"
                       style={{ fontFamily: 'var(--font-sans)' }}
                     >
                       {footer.contact.email}
@@ -138,7 +138,7 @@ export default async function Footer() {
                 )}
                 {footer.contact.address && (
                   <li className="flex items-start gap-3">
-                    <MapPin className="w-4 h-4 text-[#C5A059] mt-1 flex-shrink-0" />
+                    <MapPin className="w-4 h-4 text-[var(--color-accent)] mt-1 flex-shrink-0" />
                     <span
                       className="text-white/60 text-sm"
                       style={{ fontFamily: 'var(--font-sans)' }}
@@ -153,7 +153,7 @@ export default async function Footer() {
         </div>
 
         {/* Разделитель */}
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/20 to-transparent mb-8" />
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/20 to-transparent mb-8" />
 
         {/* Копирайт */}
         <div className="text-center">

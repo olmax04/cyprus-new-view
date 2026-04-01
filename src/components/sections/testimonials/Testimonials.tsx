@@ -17,10 +17,10 @@ export default async function Testimonials() {
   const items = testimonials?.items || []
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-[#12070c] overflow-hidden">
+    <section className="relative py-16 md:py-24 lg:py-32 bg-[var(--color-bg-surface)] overflow-hidden">
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 right-[-200px] w-[600px] h-[600px] bg-[#C5A059]/5 rounded-full blur-[140px] animate-[pulse_14s_ease-in-out_infinite]" />
+        <div className="absolute top-1/3 right-[-200px] w-[600px] h-[600px] bg-[var(--color-accent)]/5 rounded-full blur-[140px] animate-[pulse_14s_ease-in-out_infinite]" />
         <div className="absolute bottom-1/3 left-[-200px] w-[500px] h-[500px] bg-[#7a4a24]/5 rounded-full blur-[120px] animate-[pulse_11s_ease-in-out_infinite]" />
       </div>
 
@@ -30,7 +30,7 @@ export default async function Testimonials() {
           <div className="text-center mb-12 md:mb-16">
             {testimonials?.subheading && (
               <p
-                className="text-[#C5A059] uppercase tracking-[0.3em] text-[0.8125rem] mb-4"
+                className="text-[var(--color-accent)] uppercase tracking-[0.3em] text-[0.8125rem] mb-4"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 {testimonials.subheading}

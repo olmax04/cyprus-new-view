@@ -125,10 +125,10 @@ export default function EstatesFilter({ locale }: EstatesFilterProps) {
   }
 
   const inputClasses =
-    'w-full bg-[#0a0508]/80 border border-[#C5A059]/20 hover:border-[#C5A059]/50 text-white text-sm rounded-sm px-4 py-3 focus:outline-none focus:border-[#C5A059] transition-all duration-300 placeholder:text-white/20 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0'
+    'w-full bg-[var(--color-bg-dark)]/80 border border-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 text-white text-sm rounded-sm px-4 py-3 focus:outline-none focus:border-[var(--color-accent)] transition-all duration-300 placeholder:text-white/20 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0'
 
   return (
-    <div className="w-full bg-[#12070c]/80 backdrop-blur-md border border-[#C5A059]/30 rounded-lg p-6 mb-12 shadow-2xl relative z-40">
+    <div className="w-full bg-[var(--color-bg-surface)]/80 backdrop-blur-md border border-[var(--color-accent)]/30 rounded-lg p-6 mb-12 shadow-2xl relative z-40">
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Core Filters */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -188,7 +188,7 @@ export default function EstatesFilter({ locale }: EstatesFilterProps) {
         <div className="flex gap-4 items-end mt-4 lg:mt-0">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 h-[46px] px-4 bg-[#C5A059]/10 text-[#C5A059] border border-[#C5A059]/30 hover:bg-[#C5A059]/20 hover:border-[#C5A059]/50 rounded-sm transition-colors text-sm font-sans uppercase tracking-wider whitespace-nowrap"
+            className="flex items-center gap-2 h-[46px] px-4 bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/20 hover:border-[var(--color-accent)]/50 rounded-sm transition-colors text-sm font-sans uppercase tracking-wider whitespace-nowrap"
           >
             <SlidersHorizontal className="w-4 h-4" />
             <span className="hidden sm:inline">{t.filtersBtn}</span>
@@ -196,7 +196,7 @@ export default function EstatesFilter({ locale }: EstatesFilterProps) {
 
           <button
             onClick={applyFilters}
-            className="flex-1 lg:flex-none items-center justify-center gap-2 h-[46px] px-8 bg-[#C5A059] hover:bg-[#d4b26a] hover:scale-[1.02] text-[#12070c] rounded-sm transition-all text-sm font-sans font-bold uppercase tracking-wider whitespace-nowrap flex shadow-lg hover:shadow-[#C5A059]/20"
+            className="flex-1 lg:flex-none items-center justify-center gap-2 h-[46px] px-8 bg-[var(--color-accent)] hover:bg-[var(--color-accent-h)] hover:scale-[1.02] text-[var(--color-bg-surface)] rounded-sm transition-all text-sm font-sans font-bold uppercase tracking-wider whitespace-nowrap flex shadow-lg hover:shadow-[var(--color-accent)]/20"
           >
             <Search className="w-4 h-4" />
             {t.searchBtn}
@@ -308,7 +308,7 @@ export default function EstatesFilter({ locale }: EstatesFilterProps) {
         <div className="md:col-span-4 flex justify-end mt-2">
           <button
             onClick={clearFilters}
-            className="flex items-center gap-2 text-white/50 hover:text-[#C5A059] transition-colors text-xs font-sans uppercase tracking-wider"
+            className="flex items-center gap-2 text-white/50 hover:text-[var(--color-accent)] transition-colors text-xs font-sans uppercase tracking-wider"
           >
             <X className="w-3 h-3" />
             {t.clearBtn}

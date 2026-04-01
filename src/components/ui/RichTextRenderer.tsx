@@ -53,7 +53,7 @@ function RenderNode({ node }: { node: RichTextNode }) {
       }
       if (node.format & 16) {
         textElement = (
-          <code className="bg-[#C5A059]/10 text-[#C5A059] px-1.5 py-0.5 rounded text-sm font-mono">
+          <code className="bg-[var(--color-accent)]/10 text-[var(--color-accent)] px-1.5 py-0.5 rounded text-sm font-mono">
             {textElement}
           </code>
         )
@@ -75,7 +75,7 @@ function RenderNode({ node }: { node: RichTextNode }) {
     return (
       <a
         href={node.url || '#'}
-        className="text-[#C5A059] hover:text-[#d4b26a] underline underline-offset-2 transition-colors"
+        className="text-[var(--color-accent)] hover:text-[var(--color-accent-h)] underline underline-offset-2 transition-colors"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -152,7 +152,7 @@ function RenderNode({ node }: { node: RichTextNode }) {
   // Quote
   if (node.type === 'quote') {
     return (
-      <blockquote className="border-l-2 border-[#C5A059]/50 pl-4 md:pl-6 my-5 italic text-white/60 font-sans text-sm md:text-base leading-relaxed">
+      <blockquote className="border-l-2 border-[var(--color-accent)]/50 pl-4 md:pl-6 my-5 italic text-white/60 font-sans text-sm md:text-base leading-relaxed">
         {children}
       </blockquote>
     )

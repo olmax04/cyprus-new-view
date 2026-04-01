@@ -53,10 +53,10 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
   return (
     <div className="relative">
       {/* Карточка отзыва */}
-      <div className="relative bg-[#1a0b10]/40 backdrop-blur-sm border border-[#C5A059]/20 p-8 md:p-12 rounded-lg overflow-hidden transition-all duration-700 ease-in-out">
+      <div className="relative bg-[var(--color-bg-mid)]/40 backdrop-blur-sm border border-[var(--color-accent)]/20 p-8 md:p-12 rounded-lg overflow-hidden transition-all duration-700 ease-in-out">
         {/* Кавычки */}
         <div
-          className="absolute top-6 left-6 text-6xl text-[#C5A059]/20 transition-opacity duration-500"
+          className="absolute top-6 left-6 text-6xl text-[var(--color-accent)]/20 transition-opacity duration-500"
           style={{ fontFamily: 'var(--font-serif)', opacity: isAnimating ? 0 : 1 }}
         >
           &ldquo;
@@ -71,7 +71,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
           {activeItem?.rating && (
             <div className="flex gap-1 mb-6 transition-all duration-500">
               {Array.from({ length: activeItem.rating }).map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-[#C5A059] text-[#C5A059]" />
+                <Star key={i} className="w-5 h-5 fill-[var(--color-accent)] text-[var(--color-accent)]" />
               ))}
             </div>
           )}
@@ -87,7 +87,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
           {/* Клиент */}
           <div className="flex items-center gap-4 transition-all duration-500">
             {imageSrc && (
-              <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#C5A059]/30 transition-all duration-500">
+              <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[var(--color-accent)]/30 transition-all duration-500">
                 <Image src={imageSrc} alt={activeItem?.name || ''} fill className="object-cover" />
               </div>
             )}
@@ -100,7 +100,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
               </div>
               {(activeItem?.role || activeItem?.country) && (
                 <div
-                  className="text-[#C5A059]/70 text-sm transition-all duration-500"
+                  className="text-[var(--color-accent)]/70 text-sm transition-all duration-500"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {[activeItem?.role, activeItem?.country].filter(Boolean).join(' • ')}
@@ -117,7 +117,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
           <button
             onClick={handlePrev}
             disabled={isAnimating}
-            className="w-12 h-12 flex items-center justify-center border border-[#C5A059]/40 bg-transparent text-[#C5A059] hover:bg-[#C5A059]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-12 h-12 flex items-center justify-center border border-[var(--color-accent)]/40 bg-transparent text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -132,8 +132,8 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
                 disabled={isAnimating}
                 className={`h-2 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
                   index === activeIndex
-                    ? 'bg-[#C5A059] w-8'
-                    : 'bg-[#C5A059]/30 hover:bg-[#C5A059]/50 w-2'
+                    ? 'bg-[var(--color-accent)] w-8'
+                    : 'bg-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/50 w-2'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -143,7 +143,7 @@ export default function TestimonialsCarousel({ items }: TestimonialsCarouselProp
           <button
             onClick={handleNext}
             disabled={isAnimating}
-            className="w-12 h-12 flex items-center justify-center border border-[#C5A059]/40 bg-transparent text-[#C5A059] hover:bg-[#C5A059]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-12 h-12 flex items-center justify-center border border-[var(--color-accent)]/40 bg-transparent text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-6 h-6" />

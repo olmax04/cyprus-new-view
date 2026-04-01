@@ -84,7 +84,7 @@ export default function HeroGallery({ items }: HeroGalleryProps) {
             >
               <div className="relative h-full w-full overflow-hidden bg-transparent">
                 <Image src={item.src} alt={item.alt} fill className="object-cover opacity-100" />
-                <div className="absolute bottom-4 left-4 text-[0.6rem] uppercase tracking-[0.35em] text-[#C5A059]/80">
+                <div className="absolute bottom-4 left-4 text-[0.6rem] uppercase tracking-[0.35em] text-[var(--color-accent)]/80">
                   {item.alt}
                 </div>
               </div>

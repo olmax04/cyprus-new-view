@@ -33,7 +33,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-theme="crimson">
       <body className={`${serifFont.variable} ${sansFont.variable} font-sans`}>
         <Header locale={locale} nav={nav} />
         <main className="min-h-screen">
