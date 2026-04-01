@@ -70,14 +70,14 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
       <Link
         href="/estates"
         onClick={(e) => handleLinkClick(e, '/estates')}
-        className="hover:text-[#C5A059] transition-colors relative flex items-center gap-1 h-full"
+        className="hover:text-[var(--color-accent)] transition-colors relative flex items-center gap-1 h-full"
       >
         {label}
         <ChevronDown
-          className={`w-3 h-3 transition-transform duration-300 opacity-50 ${isOpen ? 'rotate-180 text-[#C5A059] opacity-100' : ''}`}
+          className={`w-3 h-3 transition-transform duration-300 opacity-50 ${isOpen ? 'rotate-180 text-[var(--color-accent)] opacity-100' : ''}`}
         />
         <span
-          className={`absolute -bottom-1 left-0 h-px bg-[#C5A059] transition-all ${
+          className={`absolute -bottom-1 left-0 h-px bg-[var(--color-accent)] transition-all ${
             isOpen ? 'w-full' : 'w-0 group-hover:w-full'
           }`}
         />
@@ -85,7 +85,7 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
 
       {/* Main Dropdown */}
       <div
-        className={`absolute top-full left-0 mt-2.5 w-64 z-10 bg-[#0a0508]/95 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-top-left ${
+        className={`absolute top-full left-0 mt-2.5 w-64 z-10 bg-[var(--color-bg-dark)]/95 backdrop-blur-xl border border-[var(--color-accent)]/30 rounded-sm shadow-2xl transition-all duration-300 origin-top-left ${
           isOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
         }`}
       >
@@ -97,7 +97,7 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
             <Link
               href="/estates"
               onClick={(e) => handleLinkClick(e, '/estates')}
-              className="block px-4 py-2.5 text-sm text-[#C5A059] border-b border-[#C5A059]/10 hover:bg-[#C5A059]/10 transition-colors rounded-sm font-medium tracking-wide"
+              className="block px-4 py-2.5 text-sm text-[var(--color-accent)] border-b border-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/10 transition-colors rounded-sm font-medium tracking-wide"
             >
               {t.all}
             </Link>
@@ -113,19 +113,19 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
               <button
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors rounded-sm ${
                   activeTransaction === trans.id
-                    ? 'bg-[#C5A059]/10 text-white'
-                    : 'text-white/70 hover:bg-[#C5A059]/5 hover:text-white'
+                    ? 'bg-[var(--color-accent)]/10 text-white'
+                    : 'text-white/70 hover:bg-[var(--color-accent)]/5 hover:text-white'
                 }`}
               >
                 {trans.label}
                 <ChevronRight
-                  className={`w-4 h-4 transition-transform duration-300 ${activeTransaction === trans.id ? 'text-[#C5A059] translate-x-1' : 'text-white/30'}`}
+                  className={`w-4 h-4 transition-transform duration-300 ${activeTransaction === trans.id ? 'text-[var(--color-accent)] translate-x-1' : 'text-white/30'}`}
                 />
               </button>
 
               {/* Sub-menu (Property Types) */}
               <div
-                className={`absolute top-0 left-full ml-1 w-56 bg-[#0a0508]/98 backdrop-blur-xl border border-[#C5A059]/30 rounded-sm shadow-2xl transition-all duration-300 origin-left ${
+                className={`absolute top-0 left-full ml-1 w-56 bg-[var(--color-bg-dark)]/98 backdrop-blur-xl border border-[var(--color-accent)]/30 rounded-sm shadow-2xl transition-all duration-300 origin-left ${
                   activeTransaction === trans.id
                     ? 'opacity-100 scale-100 visible'
                     : 'opacity-0 scale-95 invisible'
@@ -135,7 +135,7 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
                 {/* Hover bridge */}
                 <ul className="py-2">
                   <li className="px-2 mb-1">
-                    <span className="block px-4 py-1 text-xs text-[#C5A059]/60 uppercase tracking-widest font-serif">
+                    <span className="block px-4 py-1 text-xs text-[var(--color-accent)]/60 uppercase tracking-widest font-serif">
                       {trans.label}
                     </span>
                   </li>
@@ -149,17 +149,17 @@ export default function EstatesDropdown({ locale, label }: EstatesDropdownProps)
                             `/estates?transactionType=${trans.id}&propertyType=${prop.id}`,
                           )
                         }
-                        className="block px-4 py-2 text-sm text-white/70 hover:bg-[#C5A059]/10 hover:text-white transition-colors rounded-sm group-hover/link"
+                        className="block px-4 py-2 text-sm text-white/70 hover:bg-[var(--color-accent)]/10 hover:text-white transition-colors rounded-sm group-hover/link"
                       >
                         {prop.label}
                       </Link>
                     </li>
                   ))}
-                  <li className="px-2 mt-1 pt-1 border-t border-[#C5A059]/10">
+                  <li className="px-2 mt-1 pt-1 border-t border-[var(--color-accent)]/10">
                     <Link
                       href={`/estates?transactionType=${trans.id}`}
                       onClick={(e) => handleLinkClick(e, `/estates?transactionType=${trans.id}`)}
-                      className="block px-4 py-2 text-sm text-[#C5A059]/80 hover:bg-[#C5A059]/10 hover:text-[#C5A059] transition-colors rounded-sm italic"
+                      className="block px-4 py-2 text-sm text-[var(--color-accent)]/80 hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors rounded-sm italic"
                     >
                       {t.all} {trans.label.toLowerCase()}
                     </Link>

@@ -64,7 +64,7 @@ export default async function Hero() {
 
   return (
     <main
-      className={`relative min-h-screen w-full overflow-hidden bg-[#2a0f1b] ${serifFont.variable} ${sansFont.variable}`}
+      className={`relative min-h-screen w-full overflow-hidden bg-[var(--color-bg-hero)] ${serifFont.variable} ${sansFont.variable}`}
     >
       <HeroDiamonds />
       <HeroWrapper

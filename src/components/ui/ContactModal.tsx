@@ -78,11 +78,11 @@ export default function ContactModal({
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-lg bg-[#12070c] border border-[#C5A059]/20 rounded-lg shadow-2xl animate-[modalIn_0.3s_ease-out]"
+        className="relative w-full max-w-lg bg-[var(--color-bg-surface)] border border-[var(--color-accent)]/20 rounded-lg shadow-2xl animate-[modalIn_0.3s_ease-out]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Decorative top border */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent" />
 
         {/* Close button */}
         <button
@@ -96,7 +96,7 @@ export default function ContactModal({
         <div className="p-8 md:p-10">
           <div className="mb-8">
             <p
-              className="text-[#C5A059] uppercase tracking-[0.3em] text-[0.75rem] mb-3"
+              className="text-[var(--color-accent)] uppercase tracking-[0.3em] text-[0.75rem] mb-3"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
               {t.subtitle}
@@ -107,7 +107,7 @@ export default function ContactModal({
             >
               {t.title}
             </h2>
-            <div className="w-16 h-[1px] mt-4 bg-gradient-to-r from-[#C5A059]/60 to-transparent" />
+            <div className="w-16 h-[1px] mt-4 bg-gradient-to-r from-[var(--color-accent)]/60 to-transparent" />
           </div>
 
           <div className="space-y-5">
@@ -117,9 +117,9 @@ export default function ContactModal({
                 href={item.href}
                 target={item.href.startsWith('https') ? '_blank' : undefined}
                 rel={item.href.startsWith('https') ? 'noopener noreferrer' : undefined}
-                className="group flex items-start gap-4 p-4 rounded-lg border border-[#C5A059]/10 bg-[#0a0508]/50 hover:border-[#C5A059]/30 hover:bg-[#0a0508]/80 transition-all duration-300"
+                className="group flex items-start gap-4 p-4 rounded-lg border border-[var(--color-accent)]/10 bg-[var(--color-bg-dark)]/50 hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-bg-dark)]/80 transition-all duration-300"
               >
-                <div className="mt-0.5 text-[#C5A059] opacity-70 group-hover:opacity-100 transition-opacity">
+                <div className="mt-0.5 text-[var(--color-accent)] opacity-70 group-hover:opacity-100 transition-opacity">
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -136,7 +136,7 @@ export default function ContactModal({
                     {item.value}
                   </span>
                 </div>
-                <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-[#C5A059]/60 transition-colors mt-1 shrink-0" />
+                <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-[var(--color-accent)]/60 transition-colors mt-1 shrink-0" />
               </a>
             ))}
           </div>

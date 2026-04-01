@@ -17,10 +17,10 @@ export default async function FAQ() {
   const items = faq?.items || []
 
   return (
-    <section id="faq" className="relative py-16 md:py-24 lg:py-32 bg-[#0f0509] overflow-hidden">
+    <section id="faq" className="relative py-16 md:py-24 lg:py-32 bg-[var(--color-bg-dark)] overflow-hidden">
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-[#C5A059]/5 rounded-full blur-[100px] animate-[pulse_13s_ease-in-out_infinite]" />
+        <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-[var(--color-accent)]/5 rounded-full blur-[100px] animate-[pulse_13s_ease-in-out_infinite]" />
         <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#7a4a24]/5 rounded-full blur-[120px] animate-[pulse_15s_ease-in-out_infinite]" />
       </div>
 
@@ -30,7 +30,7 @@ export default async function FAQ() {
           <div className="text-center mb-12 md:mb-16">
             {faq?.subheading && (
               <p
-                className="text-[#C5A059] uppercase tracking-[0.3em] text-[0.8125rem] mb-4"
+                className="text-[var(--color-accent)] uppercase tracking-[0.3em] text-[0.8125rem] mb-4"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 {faq.subheading}

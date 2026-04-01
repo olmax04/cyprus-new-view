@@ -89,8 +89,8 @@ export default function Header({ locale, nav }: HeaderProps) {
           isMobileMenuOpen
             ? 'bg-transparent pointer-events-none'
             : isScrolled
-              ? 'bg-[#12070c]/70 backdrop-blur-md'
-              : 'bg-[#12070c]/20 backdrop-blur-md'
+              ? 'bg-[var(--color-bg-surface)]/70 backdrop-blur-md'
+              : 'bg-[var(--color-bg-surface)]/20 backdrop-blur-md'
         }`}
       >
         <div className="flex items-center justify-between px-6 md:px-8 lg:px-16 py-6 md:py-8 h-20 md:h-24">
@@ -138,21 +138,21 @@ export default function Header({ locale, nav }: HeaderProps) {
                   key={item.id}
                   href={item.href!}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`hover:text-[#C5A059] transition-colors relative group ${pathname === item.href ? 'text-[#C5A059]' : ''}`}
+                  className={`hover:text-[var(--color-accent)] transition-colors relative group ${pathname === item.href ? 'text-[var(--color-accent)]' : ''}`}
                 >
                   {item.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-px bg-[#C5A059] transition-all ${pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`}
+                    className={`absolute -bottom-1 left-0 h-px bg-[var(--color-accent)] transition-all ${pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`}
                   />
                 </Link>
               ) : (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className="hover:text-[#C5A059] transition-colors relative group"
+                  className="hover:text-[var(--color-accent)] transition-colors relative group"
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#C5A059] transition-all group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--color-accent)] transition-all group-hover:w-full" />
                 </button>
               )
             })}
@@ -160,12 +160,12 @@ export default function Header({ locale, nav }: HeaderProps) {
 
           <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0">
             <a
-              className="hidden md:flex items-center gap-2 text-white/90 hover:text-[#C5A059] transition-colors"
+              className="hidden md:flex items-center gap-2 text-white/90 hover:text-[var(--color-accent)] transition-colors"
               href={nav.whatsappUrl || '#'}
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Phone className="w-5 h-5 md:w-6 md:h-6 text-[#C5A059]" />
+              <Phone className="w-5 h-5 md:w-6 md:h-6 text-[var(--color-accent)]" />
               <span className="font-sans text-[0.9375rem] lg:text-[1.0625rem] font-light hidden xl:inline">
                 {nav.whatsappLabel}
               </span>
@@ -183,17 +183,17 @@ export default function Header({ locale, nav }: HeaderProps) {
             >
               <div className="relative w-6 h-5 overflow-visible">
                 <span
-                  className={`absolute left-0 w-full h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
+                  className={`absolute left-0 w-full h-[1.5px] bg-[var(--color-accent)] transition-all duration-300 ease-out ${
                     isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
                   }`}
                 />
                 <span
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 h-[1.5px] bg-[var(--color-accent)] transition-all duration-300 ease-out ${
                     isMobileMenuOpen ? 'w-0 opacity-0' : 'w-4 opacity-100'
                   }`}
                 />
                 <span
-                  className={`absolute left-0 w-full h-[1.5px] bg-[#C5A059] transition-all duration-300 ease-out ${
+                  className={`absolute left-0 w-full h-[1.5px] bg-[var(--color-accent)] transition-all duration-300 ease-out ${
                     isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
                   }`}
                 />
@@ -203,14 +203,14 @@ export default function Header({ locale, nav }: HeaderProps) {
         </div>
         {/* Static thin line at the top */}
         <div
-          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent transition-opacity duration-300 ${
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/30 to-transparent transition-opacity duration-300 ${
             isMobileMenuOpen ? 'opacity-0 md:opacity-100' : 'opacity-100'
           }`}
         />
 
         {/* Animated thicker gradient line on scroll */}
         <div
-          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#d4b26a] to-transparent transition-all duration-700 ease-in-out origin-center ${
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[var(--color-accent-h)] to-transparent transition-all duration-700 ease-in-out origin-center ${
             isScrolled && !isMobileMenuOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'
           } md:${isScrolled ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'}`}
         />
@@ -223,12 +223,12 @@ export default function Header({ locale, nav }: HeaderProps) {
         }`}
       >
         {/* Background */}
-        <div className="absolute inset-0 bg-[#0a0508]/98 backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-[var(--color-bg-dark)]/98 backdrop-blur-xl" />
 
         {/* Decorative background elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className={`absolute top-1/4 -left-20 w-[300px] h-[300px] rounded-full bg-[#C5A059]/8 blur-[100px] transition-all duration-700 delay-200 ${
+            className={`absolute top-1/4 -left-20 w-[300px] h-[300px] rounded-full bg-[var(--color-accent)]/8 blur-[100px] transition-all duration-700 delay-200 ${
               isMobileMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
             }`}
           />
@@ -238,8 +238,8 @@ export default function Header({ locale, nav }: HeaderProps) {
             }`}
           />
           {/* Vertical decorative lines */}
-          <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#C5A059]/15 to-transparent" />
-          <div className="absolute right-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#C5A059]/15 to-transparent" />
+          <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[var(--color-accent)]/15 to-transparent" />
+          <div className="absolute right-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[var(--color-accent)]/15 to-transparent" />
         </div>
 
         {/* Menu content */}
@@ -273,7 +273,7 @@ export default function Header({ locale, nav }: HeaderProps) {
                 priority
               />
             </button>
-            <div className="mt-4 w-16 h-px mx-auto bg-gradient-to-r from-transparent via-[#C5A059]/60 to-transparent" />
+            <div className="mt-4 w-16 h-px mx-auto bg-gradient-to-r from-transparent via-[var(--color-accent)]/60 to-transparent" />
           </div>
 
           {/* Navigation items with cascade animation */}
@@ -295,18 +295,18 @@ export default function Header({ locale, nav }: HeaderProps) {
                     className="group w-full py-4 sm:py-5 flex items-center justify-center relative"
                   >
                     {/* Hover background */}
-                    <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
+                    <div className="absolute inset-0 bg-[var(--color-accent)]/0 group-active:bg-[var(--color-accent)]/5 transition-colors duration-300 border-y border-transparent group-active:border-[var(--color-accent)]/10" />
 
                     {/* Label */}
                     <span
-                      className={`relative font-serif text-xl sm:text-2xl tracking-[0.15em] uppercase font-light transition-colors duration-300 ${pathname === item.href ? 'text-[#C5A059]' : 'text-white/90 group-active:text-[#C5A059]'}`}
+                      className={`relative font-serif text-xl sm:text-2xl tracking-[0.15em] uppercase font-light transition-colors duration-300 ${pathname === item.href ? 'text-[var(--color-accent)]' : 'text-white/90 group-active:text-[var(--color-accent)]'}`}
                     >
                       {item.label}
                     </span>
 
                     {/* Decorative dot */}
                     <span
-                      className={`absolute right-4 w-1.5 h-1.5 rotate-45 border transition-colors ${pathname === item.href ? 'border-[#C5A059]/60' : 'border-[#C5A059]/30 group-active:border-[#C5A059]/60'}`}
+                      className={`absolute right-4 w-1.5 h-1.5 rotate-45 border transition-colors ${pathname === item.href ? 'border-[var(--color-accent)]/60' : 'border-[var(--color-accent)]/30 group-active:border-[var(--color-accent)]/60'}`}
                     />
                   </Link>
                 ) : (
@@ -315,21 +315,21 @@ export default function Header({ locale, nav }: HeaderProps) {
                     className="group w-full py-4 sm:py-5 flex items-center justify-center relative"
                   >
                     {/* Hover background */}
-                    <div className="absolute inset-0 bg-[#C5A059]/0 group-active:bg-[#C5A059]/5 transition-colors duration-300 border-y border-transparent group-active:border-[#C5A059]/10" />
+                    <div className="absolute inset-0 bg-[var(--color-accent)]/0 group-active:bg-[var(--color-accent)]/5 transition-colors duration-300 border-y border-transparent group-active:border-[var(--color-accent)]/10" />
 
                     {/* Label */}
-                    <span className="relative font-serif text-xl sm:text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[#C5A059] transition-colors duration-300">
+                    <span className="relative font-serif text-xl sm:text-2xl text-white/90 tracking-[0.15em] uppercase font-light group-active:text-[var(--color-accent)] transition-colors duration-300">
                       {item.label}
                     </span>
 
                     {/* Decorative dot */}
-                    <span className="absolute right-4 w-1.5 h-1.5 rotate-45 border border-[#C5A059]/30 group-active:border-[#C5A059]/60 transition-colors" />
+                    <span className="absolute right-4 w-1.5 h-1.5 rotate-45 border border-[var(--color-accent)]/30 group-active:border-[var(--color-accent)]/60 transition-colors" />
                   </button>
                 )}
 
                 {/* Separator line */}
                 {index < navItems.length - 1 && (
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-[#C5A059]/20 to-transparent" />
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/20 to-transparent" />
                 )}
               </div>
             ))}
@@ -341,7 +341,7 @@ export default function Header({ locale, nav }: HeaderProps) {
               isMobileMenuOpen ? 'opacity-100 scale-100 rotate-45' : 'opacity-0 scale-0 rotate-0'
             }`}
           >
-            <div className="w-3 h-3 border border-[#C5A059]/50 bg-[#C5A059]/10" />
+            <div className="w-3 h-3 border border-[var(--color-accent)]/50 bg-[var(--color-accent)]/10" />
           </div>
 
           {/* WhatsApp link */}
@@ -349,11 +349,11 @@ export default function Header({ locale, nav }: HeaderProps) {
             href={nav.whatsappUrl || '#'}
             rel="noopener noreferrer"
             target="_blank"
-            className={`flex items-center gap-3 text-white/70 hover:text-[#C5A059] transition-all duration-500 delay-600 ${
+            className={`flex items-center gap-3 text-white/70 hover:text-[var(--color-accent)] transition-all duration-500 delay-600 ${
               isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            <Phone className="w-5 h-5 text-[#C5A059]" />
+            <Phone className="w-5 h-5 text-[var(--color-accent)]" />
             <span className="font-sans text-sm tracking-wider">{nav.whatsappLabel}</span>
           </a>
 
@@ -369,12 +369,12 @@ export default function Header({ locale, nav }: HeaderProps) {
 
         {/* Corner decorative diamonds */}
         <div
-          className={`absolute bottom-8 left-8 w-2 h-2 rotate-45 border border-[#C5A059]/25 transition-all duration-500 delay-300 ${
+          className={`absolute bottom-8 left-8 w-2 h-2 rotate-45 border border-[var(--color-accent)]/25 transition-all duration-500 delay-300 ${
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
         />
         <div
-          className={`absolute bottom-8 right-8 w-2 h-2 rotate-45 border border-[#C5A059]/25 transition-all duration-500 delay-300 ${
+          className={`absolute bottom-8 right-8 w-2 h-2 rotate-45 border border-[var(--color-accent)]/25 transition-all duration-500 delay-300 ${
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
         />

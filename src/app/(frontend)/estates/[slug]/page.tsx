@@ -130,7 +130,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
   }
 
   return (
-    <div className="min-h-screen relative bg-[#2a0f1b] pt-24 md:pt-28 pb-16 overflow-hidden">
+    <div className="min-h-screen relative bg-[var(--color-bg-hero)] pt-24 md:pt-28 pb-16 overflow-hidden">
       {/* Hero Background */}
       <div className="absolute top-0 left-0 right-0 h-[50vh] z-0 overflow-hidden pointer-events-none">
         <Image
@@ -141,12 +141,12 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
           priority
         />
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a0f1b]/20 via-[#2a0f1b]/60 to-[#2a0f1b]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg-hero)]/20 via-[var(--color-bg-hero)]/60 to-[var(--color-bg-hero)]" />
       </div>
 
       {/* Decorative blurs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[15vh] right-0 w-[400px] h-[400px] bg-[#C5A059]/8 rounded-full blur-[120px]" />
+        <div className="absolute top-[15vh] right-0 w-[400px] h-[400px] bg-[var(--color-accent)]/8 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#7a4a24]/8 rounded-full blur-[140px]" />
       </div>
 
@@ -154,7 +154,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
         {/* Back Link */}
         <Link
           href="/estates"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-[#C5A059] transition-colors text-sm font-sans tracking-wider uppercase mb-6 md:mb-8 group"
+          className="inline-flex items-center gap-2 text-white/50 hover:text-[var(--color-accent)] transition-colors text-sm font-sans tracking-wider uppercase mb-6 md:mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           {t.back}
@@ -164,12 +164,12 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
         <div className="mb-8 md:mb-10">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             {estate.transactionType && (
-              <span className="bg-[#C5A059] text-[#12070c] text-[0.65rem] font-sans font-bold uppercase tracking-widest px-3 py-1.5 rounded-sm">
+              <span className="bg-[var(--color-accent)] text-[var(--color-bg-surface)] text-[0.65rem] font-sans font-bold uppercase tracking-widest px-3 py-1.5 rounded-sm">
                 {transTypeMap[estate.transactionType]}
               </span>
             )}
             {estate.propertyType && (
-              <span className="bg-[#12070c]/80 backdrop-blur-sm border border-[#C5A059]/30 text-white/90 text-[0.65rem] font-sans font-medium uppercase tracking-widest px-3 py-1.5 rounded-sm">
+              <span className="bg-[var(--color-bg-surface)]/80 backdrop-blur-sm border border-[var(--color-accent)]/30 text-white/90 text-[0.65rem] font-sans font-medium uppercase tracking-widest px-3 py-1.5 rounded-sm">
                 {propTypeMap[estate.propertyType]}
               </span>
             )}
@@ -180,11 +180,11 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
           </h1>
 
           <div className="flex items-center gap-2 mt-3 text-white/50">
-            <MapPin className="w-4 h-4 text-[#C5A059]" />
+            <MapPin className="w-4 h-4 text-[var(--color-accent)]" />
             <span className="font-sans text-sm tracking-wider">{estate.location}</span>
           </div>
 
-          <div className="w-full h-[1px] mt-6 bg-gradient-to-r from-[#C5A059]/60 via-[#C5A059]/20 to-transparent" />
+          <div className="w-full h-[1px] mt-6 bg-gradient-to-r from-[var(--color-accent)]/60 via-[var(--color-accent)]/20 to-transparent" />
         </div>
 
         {/* Gallery */}
@@ -202,10 +202,10 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
             {estate.description && (
               <div className="mb-10">
                 <h2 className="text-xl md:text-2xl font-serif text-white tracking-wide mb-6 flex items-center gap-3">
-                  <div className="w-8 h-[2px] bg-gradient-to-r from-[#C5A059] to-transparent" />
+                  <div className="w-8 h-[2px] bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
                   {t.description}
                 </h2>
-                <div className="bg-[#12070c]/40 backdrop-blur-sm border border-[#C5A059]/10 rounded-lg p-6 md:p-8">
+                <div className="bg-[var(--color-bg-surface)]/40 backdrop-blur-sm border border-[var(--color-accent)]/10 rounded-lg p-6 md:p-8">
                   <RichTextRenderer content={estate.description} />
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
             {/* Details Grid */}
             <div>
               <h2 className="text-xl md:text-2xl font-serif text-white tracking-wide mb-6 flex items-center gap-3">
-                <div className="w-8 h-[2px] bg-gradient-to-r from-[#C5A059] to-transparent" />
+                <div className="w-8 h-[2px] bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
                 {t.details}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -260,21 +260,21 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
           <div className="lg:col-span-1">
             {/* Price Card */}
             <div className="sticky top-28">
-              <div className="bg-[#12070c]/60 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8 mb-6">
+              <div className="bg-[var(--color-bg-surface)]/60 backdrop-blur-md border border-[var(--color-accent)]/20 rounded-lg p-6 md:p-8 mb-6">
                 <span className="text-white/50 text-xs font-sans uppercase tracking-widest block mb-2">
                   {t.price}
                 </span>
-                <div className="text-[#C5A059] font-serif text-3xl md:text-4xl tracking-wide font-medium">
+                <div className="text-[var(--color-accent)] font-serif text-3xl md:text-4xl tracking-wide font-medium">
                   {formatPrice(estate.price, estate.currency)}
                 </div>
-                <div className="w-full h-[1px] my-5 bg-gradient-to-r from-[#C5A059]/30 to-transparent" />
+                <div className="w-full h-[1px] my-5 bg-gradient-to-r from-[var(--color-accent)]/30 to-transparent" />
 
                 {/* Quick Stats */}
                 <div className="space-y-3">
                   {estate.rooms && (
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/50 font-sans flex items-center gap-2">
-                        <BedDouble className="w-4 h-4 text-[#C5A059]" />
+                        <BedDouble className="w-4 h-4 text-[var(--color-accent)]" />
                         {t.rooms}
                       </span>
                       <span className="text-white font-sans">{estate.rooms}</span>
@@ -283,7 +283,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                   {estate.area && (
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/50 font-sans flex items-center gap-2">
-                        <Maximize className="w-3.5 h-3.5 text-[#C5A059]" />
+                        <Maximize className="w-3.5 h-3.5 text-[var(--color-accent)]" />
                         {t.area}
                       </span>
                       <span className="text-white font-sans">{estate.area} m²</span>
@@ -292,7 +292,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                   {estate.area && estate.price && (
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/50 font-sans flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-[#C5A059]" />
+                        <TrendingUp className="w-4 h-4 text-[var(--color-accent)]" />
                         {estate.currency || 'EUR'}/m²
                       </span>
                       <span className="text-white font-sans">
@@ -305,7 +305,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
 
               {/* Agent Contact Card */}
               {agent ? (
-                <div className="bg-gradient-to-br from-[#C5A059]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8">
+                <div className="bg-gradient-to-br from-[var(--color-accent)]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[var(--color-accent)]/20 rounded-lg p-6 md:p-8">
                   <h3 className="text-white font-serif text-lg tracking-wide mb-1">{t.interested}</h3>
                   <p className="text-white/50 text-sm font-sans leading-relaxed mb-5">
                     {t.contactDesc}
@@ -313,8 +313,8 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
 
                   {/* Agent info */}
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-11 h-11 rounded-full bg-[#C5A059]/20 border border-[#C5A059]/30 flex items-center justify-center shrink-0">
-                      <User className="w-5 h-5 text-[#C5A059]" />
+                    <div className="w-11 h-11 rounded-full bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/30 flex items-center justify-center shrink-0">
+                      <User className="w-5 h-5 text-[var(--color-accent)]" />
                     </div>
                     <div>
                       <span className="text-white font-sans text-sm font-medium block">
@@ -330,7 +330,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                     {agent.phone && (
                       <a
                         href={`tel:${agent.phone.replace(/\s/g, '')}`}
-                        className="flex items-center gap-3 w-full py-3 px-4 bg-[#C5A059] hover:bg-[#d4b26a] text-[#12070c] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#C5A059]/20"
+                        className="flex items-center gap-3 w-full py-3 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-h)] text-[var(--color-bg-surface)] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[var(--color-accent)]/20"
                       >
                         <Phone className="w-4 h-4" />
                         {agent.phone}
@@ -338,7 +338,7 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                     )}
                     <a
                       href={`mailto:${agent.email}`}
-                      className="flex items-center gap-3 w-full py-3 px-4 border border-[#C5A059]/40 text-[#C5A059] hover:bg-[#C5A059]/10 font-sans font-medium text-sm tracking-wider rounded-sm transition-all duration-300"
+                      className="flex items-center gap-3 w-full py-3 px-4 border border-[var(--color-accent)]/40 text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 font-sans font-medium text-sm tracking-wider rounded-sm transition-all duration-300"
                     >
                       <Mail className="w-4 h-4" />
                       {agent.email}
@@ -346,14 +346,14 @@ export default async function EstateDetailPage({ params }: EstateDetailPageProps
                   </div>
                 </div>
               ) : (
-                <div className="bg-gradient-to-br from-[#C5A059]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[#C5A059]/20 rounded-lg p-6 md:p-8">
+                <div className="bg-gradient-to-br from-[var(--color-accent)]/10 to-[#7a4a24]/10 backdrop-blur-md border border-[var(--color-accent)]/20 rounded-lg p-6 md:p-8">
                   <h3 className="text-white font-serif text-lg tracking-wide mb-2">{t.contactFallback}</h3>
                   <p className="text-white/50 text-sm font-sans leading-relaxed mb-5">
                     {t.contactFallbackDesc}
                   </p>
                   <Link
                     href="/#contact"
-                    className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d4b26a] text-[#12070c] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#C5A059]/20 text-center block"
+                    className="w-full py-3.5 px-6 bg-[var(--color-accent)] hover:bg-[var(--color-accent-h)] text-[var(--color-bg-surface)] font-sans font-bold text-sm uppercase tracking-wider rounded-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[var(--color-accent)]/20 text-center block"
                   >
                     {t.contact}
                   </Link>
@@ -377,8 +377,8 @@ function DetailCard({
   value: string
 }) {
   return (
-    <div className="bg-[#12070c]/40 backdrop-blur-sm border border-[#C5A059]/10 hover:border-[#C5A059]/25 rounded-lg p-4 md:p-5 transition-all duration-300 group">
-      <div className="text-[#C5A059] mb-3 opacity-70 group-hover:opacity-100 transition-opacity">
+    <div className="bg-[var(--color-bg-surface)]/40 backdrop-blur-sm border border-[var(--color-accent)]/10 hover:border-[var(--color-accent)]/25 rounded-lg p-4 md:p-5 transition-all duration-300 group">
+      <div className="text-[var(--color-accent)] mb-3 opacity-70 group-hover:opacity-100 transition-opacity">
         {icon}
       </div>
       <span className="text-white/40 text-[0.65rem] font-sans uppercase tracking-widest block mb-1">

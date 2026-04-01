@@ -58,27 +58,27 @@ export default function HeroContent({
       {/* 2. ДЕКОРАТИВНЫЕ ЛИНИИ */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         <div
-          className={`absolute left-4 md:left-[6%] h-full w-[1px] bg-[#C5A059] transition-all duration-1000 ${
+          className={`absolute left-4 md:left-[6%] h-full w-[1px] bg-[var(--color-accent)] transition-all duration-1000 ${
             mounted ? 'opacity-30 md:opacity-40' : 'opacity-0'
           }`}
         />
         <div
-          className={`absolute left-6 md:left-[7%] h-full w-[1px] bg-[#C5A059] transition-all duration-1000 delay-100 ${
+          className={`absolute left-6 md:left-[7%] h-full w-[1px] bg-[var(--color-accent)] transition-all duration-1000 delay-100 ${
             mounted ? 'opacity-20 md:opacity-30' : 'opacity-0'
           }`}
         />
         <div
-          className={`absolute right-4 h-full w-[1px] bg-[#C5A059] md:hidden transition-all duration-1000 delay-200 ${
+          className={`absolute right-4 h-full w-[1px] bg-[var(--color-accent)] md:hidden transition-all duration-1000 delay-200 ${
             mounted ? 'opacity-30' : 'opacity-0'
           }`}
         />
         <div
-          className={`absolute right-6 h-full w-[1px] bg-[#C5A059] md:hidden transition-all duration-1000 delay-300 ${
+          className={`absolute right-6 h-full w-[1px] bg-[var(--color-accent)] md:hidden transition-all duration-1000 delay-300 ${
             mounted ? 'opacity-20' : 'opacity-0'
           }`}
         />
         <div
-          className={`absolute top-20 md:top-24 w-full h-[1px] bg-[#C5A059] transition-all duration-1000 delay-400 ${
+          className={`absolute top-20 md:top-24 w-full h-[1px] bg-[var(--color-accent)] transition-all duration-1000 delay-400 ${
             mounted ? 'opacity-30 md:opacity-40 scale-x-100' : 'opacity-0 scale-x-0'
           }`}
         />
@@ -87,7 +87,7 @@ export default function HeroContent({
       {/* 2.1 ЛЮКС-ФОРМЫ */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         <div
-          className={`absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-[#C5A059]/20 blur-[120px] animate-[pulse_10s_ease-in-out_infinite] transition-all duration-1000 ${
+          className={`absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-[var(--color-accent)]/20 blur-[120px] animate-[pulse_10s_ease-in-out_infinite] transition-all duration-1000 ${
             mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
           }`}
         />
@@ -97,7 +97,7 @@ export default function HeroContent({
           }`}
         />
         <div
-          className={`absolute bottom-[-20%] left-[10%] h-[360px] w-[360px] rounded-full bg-[#C5A059]/15 blur-[140px] animate-[pulse_12s_ease-in-out_infinite] transition-all duration-1000 delay-400 ${
+          className={`absolute bottom-[-20%] left-[10%] h-[360px] w-[360px] rounded-full bg-[var(--color-accent)]/15 blur-[140px] animate-[pulse_12s_ease-in-out_infinite] transition-all duration-1000 delay-400 ${
             mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
           }`}
         />
@@ -137,14 +137,14 @@ export default function HeroContent({
                 </h1>
 
                 <div
-                  className={`mt-4 flex flex-wrap items-center gap-x-6 gap-y-4 md:gap-x-10 md:gap-y-6 text-[#C5A059] transition-all duration-700 delay-600 ${
+                  className={`mt-4 flex flex-wrap items-center gap-x-6 gap-y-4 md:gap-x-10 md:gap-y-6 text-[var(--color-accent)] transition-all duration-700 delay-600 ${
                     mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                 >
                   {stats.map((stat) => (
                     <div key={`${stat.value}-${stat.label}`}>
                       <div className="text-2xl md:text-3xl font-light">{stat.value}</div>
-                      <div className="text-[0.6875rem] md:text-[0.8125rem] uppercase tracking-[0.3em] text-[#C5A059]/70">
+                      <div className="text-[0.6875rem] md:text-[0.8125rem] uppercase tracking-[0.3em] text-[var(--color-accent)]/70">
                         {stat.label}
                       </div>
                     </div>
@@ -160,7 +160,7 @@ export default function HeroContent({
                     <span key={category.label} className="flex items-center gap-2 md:gap-3">
                       {category.label}
                       {index < categories.length - 1 && (
-                        <span className="text-[#C5A059]/30">•</span>
+                        <span className="text-[var(--color-accent)]/30">•</span>
                       )}
                     </span>
                   ))}

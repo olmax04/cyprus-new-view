@@ -12,13 +12,13 @@ export default function Button({ label, variant = 'primary', className, href }: 
     'group relative inline-flex items-center justify-center px-10 md:px-16 py-3 border font-serif tracking-[0.2em] text-[0.9375rem] md:text-[1.0625rem] uppercase overflow-hidden font-medium transition-all duration-500'
   const variants = {
     primary:
-      'border-[#C5A059]/50 bg-[#1a0b10]/30 backdrop-blur-sm text-[#C5A059] hover:bg-[#C5A059] hover:text-[#1a0b10]',
+      'border-[var(--color-accent)]/50 bg-[var(--color-bg-mid)]/30 backdrop-blur-sm text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg-mid)]',
     ghost:
-      'border-[#C5A059]/40 bg-transparent text-[#C5A059] hover:bg-[#C5A059]/10 hover:border-[#C5A059]/70',
+      'border-[var(--color-accent)]/40 bg-transparent text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 hover:border-[var(--color-accent)]/70',
   }
 
   const shimmer = variant === 'primary' && (
-    <div className="absolute inset-0 bg-[#C5A059] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+    <div className="absolute inset-0 bg-[var(--color-accent)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
   )
 
   const combinedClassName = `${base} ${variants[variant]} w-[220px] md:w-full h-[52px] ${className ?? ''}`

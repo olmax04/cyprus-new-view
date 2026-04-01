@@ -55,12 +55,12 @@ export default function HeroDiamonds() {
     <div className="absolute inset-0 z-10 pointer-events-none">
       <div
         ref={diamondPrimaryRef}
-        className="absolute right-[8%] top-[38%] h-[180px] w-[180px] border border-[#C5A059]/30"
+        className="absolute right-[8%] top-[38%] h-[180px] w-[180px] border border-[var(--color-accent)]/30"
         style={{ transform: 'translate3d(0, 0, 0) rotate(45deg)' }}
       />
       <div
         ref={diamondSecondaryRef}
-        className="absolute right-[12%] top-[42%] h-[140px] w-[140px] border border-[#C5A059]/15"
+        className="absolute right-[12%] top-[42%] h-[140px] w-[140px] border border-[var(--color-accent)]/15"
         style={{ transform: 'translate3d(0, 0, 0) rotate(45deg)' }}
       />
     </div>
